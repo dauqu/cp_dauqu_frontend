@@ -13,8 +13,10 @@ import python from "../assets/images/python5.svg";
 import angular from "../assets/images/angular.svg";
 import spring from "../assets/images/spring3.svg";
 import docker from "../assets/images/docker.svg";
+import sql from "../assets/images/sql.svg";
 import c from "../assets/images/c.svg";
 import js from "../assets/images/js.svg";
+import db from "../assets/images/db.svg";
 import css from "../assets/images/css.svg";
 import kotlin from "../assets/images/kotlin.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -31,7 +33,7 @@ function Icons_slider() {
       </div>
       <Swiper
         slidesPerView={7}
-        onSlideChange={() => console.log("slide change")}
+        // onSlideChange={() => console.log("slide change")}
         // onSwiper={(swiper) => console.log(swiper)}
         className="p-2 cursor-pointer"
         autoplay={{
@@ -97,6 +99,9 @@ function Icons_slider() {
           <img src={dart} alt="vue" className="w-16 h-16" />
         </SwiperSlide>
         <SwiperSlide className="flex ">
+          <img src={db} alt="vue" className="w-16 h-16" />
+        </SwiperSlide>
+        <SwiperSlide className="flex ">
           <img src={laravel} alt="vue" className="w-16 h-16" />
         </SwiperSlide>
         <SwiperSlide className="flex ">
@@ -111,6 +116,9 @@ function Icons_slider() {
         </SwiperSlide>
         <SwiperSlide className="flex ">
           <img src={python} alt="vue" className="w-16 h-16" />
+        </SwiperSlide>
+        <SwiperSlide className="flex ">
+          <img src={sql} alt="vue" className="w-16 h-16" />
         </SwiperSlide>
         <SwiperSlide className="flex ">
           <img src={angular} alt="vue" className="w-16 h-16" />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import img from "../assets/images/ar.png";
 import img1 from "../assets/images/gii.png";
 import img2 from "../assets/images/nf.png";
@@ -43,6 +43,9 @@ import ss2 from "../assets/images/ss2.png";
 import ss5 from "../assets/images/ss5.png";
 import ss3 from "../assets/images/ss3.png";
 import Icons_slider from "./Icons_slider";
+import axios from "axios";
+import { API } from "./Constant";
+import { Link } from "react-router-dom";
 
 function Body() {
   // stripe payment gateway code strat from here------------------------
@@ -76,6 +79,21 @@ function Body() {
   useEffect(() => {
     scrollToTop();
   }, []);
+
+  const [plans, setPlans] = useState([]);
+  const handlePlans = async () => {
+    try {
+      const res = await axios.get(`${API}/plans`);
+      setPlans(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    handlePlans();
+  }, []);
+
   return (
     <motion.div
       initial={{ y: -10, opacity: 0 }}
@@ -446,7 +464,7 @@ function Body() {
         </div>
 
         {/* plan choose content */}
-        <div className="bg-[#FAFAFA] p-8  ">
+        <div className="bg-[#FAFAFA] p-8  " id="plans">
           <div className="items-center flex justify-center">
             <AiFillDollarCircle
               className="shadow-lg"
@@ -462,77 +480,74 @@ function Body() {
           </div>
           <div className=""></div>
           <div className="flex flex-col md:flex-row  items-center   m-auto justify-center">
-            <div className="cardd m-4 shadow-md border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
-              <div className="text-[#22616C] font-semibold mt-4">Basic</div>
-              <div>
-                <span className="text[#222222] font-bold text-[40px] mt-4 ">
-                  ${plan1}
-                </span>
-                /month
-              </div>
-              <div className="mt-2 text-[15px] font-semibold">
-                Billed Monthly
-              </div>
-              <hr className="mt-4" />
-              <div className="mt-4">
-                <button
-                  className="p-2 font-semibold text-[#26606B] hover:bg-[#165461] hover:text-white "
-                  style={{ border: "1px solid #215E6A" }}
-                  onClick={() => {
-                    window.open("https://buy.stripe.com/eVabJr0E6cJM2VG9AC");
-                  }}
-                >
-                  {/* <StripeCheckout
-                    stripeKey={process.env.REACT_APP_STRIPE_KEY || ""}
-                    token={handleToken}
-                    name=""
-                    panelLabel={`Donate`}
-                    currency="USD"
-                    amount={plan1 * 100}
-                    className="p-2 font-semibold text-[#26606B] hover:bg-[#165461] hover:text-white "
-                    style={{ border: "1px solid #215E6A" }}
-                  >
-                    Buy Package
-                  </StripeCheckout> */}
-                  Buy Package
-                </button>
-              </div>
-              <hr className="mt-4" />
-              <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
-                <div className="">
-                  <GoCheck />
-                </div>
-                <div className="ml-2">Deploy 5 websites</div>
-              </div>
-              <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
-                <div className="">
-                  <GoCheck />
-                </div>
-                <div className="ml-2">10 database account</div>
-              </div>
-              <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
-                <div className="">
-                  <GoCheck />
-                </div>
-                <div className="ml-2">Free SSL Support</div>
-              </div>
-              <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
-                <div className="">
-                  <GoCheck />
-                </div>
-                <div className="ml-2">Support languages HTML & PHP</div>
-              </div>
-              {/* <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
+            {/* map funtion */}
+            {plans.map((plan) => (
+              <>
+                <div className="cardd m-4 shadow-md border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
+                  <div className="text-[#22616C] font-semibold mt-4">
+                    {plan.plan_name}
+                  </div>
+                  <div>
+                    <span className="text[#222222] font-bold text-[40px] mt-4 ">
+                      ${plan.plan_price}
+                    </span>
+                    /{plan.billing_cycle}
+                  </div>
+                  <div className="mt-2 text-[15px] font-semibold">
+                    {plan.plan_title}
+                  </div>
+                  <hr className="mt-4" />
+                  <div className="mt-4">
+                    <Link to={`/cart/${plan.plan_slug}`}>
+                      <button
+                        className="p-2 font-semibold text-[#26606B] hover:bg-[#165461] hover:text-white "
+                        style={{ border: "1px solid #215E6A" }}
+                      >
+                        Buy Package
+                      </button>
+                    </Link>
+                  </div>
+                  <hr className="mt-4" />
+                  <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
+                    <div className="">
+                      <GoCheck />
+                    </div>
+                    <div className="ml-2">{plan.plan_info_one}</div>
+                  </div>
+                  <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
+                    <div className="">
+                      <GoCheck />
+                    </div>
+                    <div className="ml-2">{plan.plan_info_two}</div>
+                  </div>
+                  <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
+                    <div className="">
+                      <GoCheck />
+                    </div>
+                    <div className="ml-2">{plan.plan_info_three}</div>
+                  </div>
+                  <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
+                    <div className="">
+                      <GoCheck />
+                    </div>
+                    <div className="ml-2">{plan.plan_info_four}</div>
+                  </div>
+                  {/* <div className="text-[#383838] flex items-center  font-semibold text-left mt-4">
                 <div className="">
                   <GoCheck />
                 </div>
                 <div className="ml-2">10 Photo Assets</div>
               </div> */}
-              <hr className="mt-4" />
-              <div className=" mt-4 text-left">Dauqu</div>
-              <div className="mt-2 text-left">0% transaction fee</div>
-            </div>
-            <div className="cardd m-4 shadow-md border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
+                  <hr className="mt-4" />
+                  <div className=" mt-4 text-left">Dauqu</div>
+                  <div className="mt-2 text-left">
+                    {plan.plan_transaction_fee}% transaction fee
+                  </div>
+                </div>
+              </>
+            ))}
+
+            {/* <div className="cardd m-4 shadow-md border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
               <div className="text-[#22616C] font-semibold mt-4">Standard</div>
               <div>
                 <span className="text[#222222] font-bold text-[40px] mt-4 ">
@@ -552,18 +567,6 @@ function Body() {
                     window.open("https://buy.stripe.com/3csdRz9aCbFI1RC145");
                   }}
                 >
-                  {/* <StripeCheckout
-                    stripeKey={process.env.REACT_APP_STRIPE_KEY || ""}
-                    token={handleToken}
-                    name=""
-                    panelLabel={`Donate`}
-                    currency="USD"
-                    amount={plan1 * 100}
-                    className="p-2 font-semibold text-[#26606B] hover:bg-[#165461] hover:text-white "
-                    style={{ border: "1px solid #215E6A" }}
-                  >
-                    Buy Package
-                  </StripeCheckout> */}
                   Buy Package
                 </button>
               </div>
@@ -616,18 +619,6 @@ function Body() {
                     window.open("https://buy.stripe.com/eVabJr0E6cJM2VG9AC");
                   }}
                 >
-                  {/* <StripeCheckout
-                    stripeKey={process.env.REACT_APP_STRIPE_KEY || ""}
-                    token={handleToken}
-                    name=""
-                    panelLabel={`Donate`}
-                    currency="USD"
-                    amount={plan1 * 100}
-                    className="p-2 font-semibold text-[#26606B] hover:bg-[#165461] hover:text-white "
-                    style={{ border: "1px solid #215E6A" }}
-                  >
-                    Buy Package
-                  </StripeCheckout> */}
                   Buy Package
                 </button>
               </div>
@@ -659,7 +650,7 @@ function Body() {
               <hr className="mt-4" />
               <div className=" mt-4 text-left">Dauqu</div>
               <div className="mt-2 text-left">0% transaction fee</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsHandbag } from "react-icons/bs";
 import { BiCreditCard } from "react-icons/bi";
@@ -10,8 +10,12 @@ import { FaStripeS } from "react-icons/fa";
 import { BsPaypal } from "react-icons/bs";
 import { SiRazorpay } from "react-icons/si";
 import axios from "axios";
+import { API } from "./Constant";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import ck from "../assets/images/ck.svg";
 
 function Cart() {
+  const [hiddendiv, setHiddendiv] = useState(false);
   // scroll to top function
   const scrollToTop = () => {
     window.scrollTo({
@@ -22,21 +26,47 @@ function Cart() {
   useEffect(() => {
     scrollToTop();
   }, []);
-  const { id } = useParams();
-  //  handle Checkoutsubmit unique key
-  const handleCheckout = () => {
-    const uniqueKey = Math.random().toString(36).slice(2, 99).toUpperCase();
 
-    console.log(uniqueKey); // unique key
+  const { slug } = useParams();
+  const [cart, setCart] = useState({});
+  // get plan by slug
+  const getPlanBySlug = async (slug) => {
+    await axios
+      .get(`${API}/plans/${slug}`)
+      .then((res) => {
+        setCart(res.data[0]);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getPlanBySlug(slug);
+  }, [slug]);
 
-    // posting unique key to database by axios
+  const paypal_payment = cart.plan_price;
+  console.log(paypal_payment);
+  const [successPayment, setSuccessPayment] = useState([]);
+  // code to post success payment response to backend
+  const handleSuccess = (details) => {
     axios
-      .patch(`http://localhost:4000/api/GetUser/update/${id}`, {
-        uniqueKey: uniqueKey,
+      .post(`${API}/orders`, {
+        order_id: details.id,
+        order_by: details.payer.name.given_name,
+        date: details.create_time,
+        status: details.status,
+        phone_number: details.payer.phone.phone_number.national_number,
+        email: details.payer.email_address,
+        payment_Status: details.purchase_units[0].payments.captures[0].status,
+        product_slug: cart.plan_slug,
+        product_price: details.purchase_units[0].amount.value,
+        city: details.payer.address.admin_area_2,
+        country: details.payer.address.country_code,
+        order_status: details.status,
       })
       .then((res) => {
-        console.log(res.data);
-        alert("New UniqueKey of user " + uniqueKey);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -61,47 +91,44 @@ function Cart() {
           }}
         >
           <div className="md:p-10 p-4 bg-[white]  m-auto   shadow-xl lg:w-[1000px] w-full">
-            <div className="   p-6 m-auto sm:flex items-center justify-between">
-              <div className="w-[200px]   text-[22px] font-bold text-[#393C3F]">
+            <div className="p-6 m-auto flex items-center justify-between">
+              <div className="md:w-[200px] w-auto   text-[22px] font-bold text-[#393C3F]">
                 Cart
               </div>
               <div className="flex items-center">
-                <div className="w-[70px] text-[#626262] cursor-pointer">
+                <div className="md:w-[70px] w-auto text-[#626262] cursor-pointer">
                   <BsHandbag />
                 </div>
               </div>
             </div>
             <div className="md:flex mt-2 p-4">
-              <div className="md:w-1/2 w-[270px] md:m-2 m-0 md:p-6 p-2">
+              <div className="md:w-1/2 w-[300px] md:m-2 m-auto md:pb-0 pb-12 md:p-6 p-2">
                 <div className="text-[22px] p-2 text-[#393C3F] font-semibold">
                   <div className="">Shopping Cart</div>
                 </div>
                 <div className="">
                   <div className="cardd shadow-md border md:w-[270px]  w-full md:mt-8   md:p-6 p-4 bg-[#FFFFFF] text-left   ">
                     <div className="text-[#22616C] font-semibold mt-4">
-                      Basic
+                      {cart.plan_name}
                     </div>
                     <div>
                       <span className="text[#222222] font-bold text-[40px] mt-4 ">
-                        $15
+                        ${cart.plan_price}
                       </span>
-                      /year
+                      /{cart.billing_cycle}
                     </div>
                     <hr className="mt-4" />
                     <div className="text-[#383838] font-semibold mt-6">
-                      1 Landing Page
+                      {cart.plan_info_one}
                     </div>
                     <div className="text-[#383838] font-semibold mt-6">
-                      10 Illustration
+                      {cart.plan_info_two}
                     </div>
                     <div className="text-[#383838] font-semibold mt-6">
-                      10 Template
+                      {cart.plan_info_three}
                     </div>
                     <div className="text-[#383838] font-semibold mt-6">
-                      3d Icon
-                    </div>
-                    <div className="text-[#383838] font-semibold mt-6">
-                      10 Photo Assets
+                      {cart.plan_info_four}
                     </div>
                   </div>
                 </div>
@@ -112,192 +139,76 @@ function Cart() {
                     </div>
                   </Link>
                   <div className="text-[17px] font-semibold">
-                    Total - <span className=" text-[20px] font-bold">$15</span>
+                    Total -{" "}
+                    <span className=" text-[20px] font-bold">
+                      ${cart.plan_price}
+                    </span>
                   </div>
                 </div>
               </div>
-              <div className="md:w-1/2 w-full m-2   text-[#393C3F] font-semibold md:p-6 p-2 bg-[#FAFAFA] rounded-[5px]">
-                <div className="text-[22px]">Payment Info</div>
-                <div className="">
-                  <div className="mt-4">
-                    Payment Method
-                    <div className=" mt-2">
-                      <div className="flex items-center ">
-                        <div className="w-[30px]">
-                          <input
-                            type="radio"
-                            id="html"
-                            name="fav_language"
-                            value="HTML"
-                          />
-                        </div>
-
-                        <div className="flex items-center">
-                          <label for="html ">Credit Card</label>
-                          <div className="w-[30px] ml-2">
-                            <BiCreditCard />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center ">
-                        <div className="w-[30px]">
-                          <input
-                            type="radio"
-                            id="html"
-                            name="fav_language"
-                            value="HTML"
-                          />
-                        </div>
-
-                        <div className="flex items-center">
-                          <label for="html ">Pay Pal</label>
-                          <div className="w-[30px] ml-2">
-                            <BsPaypal />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center ">
-                        <div className="w-[30px]">
-                          <input
-                            type="radio"
-                            id="html"
-                            name="fav_language"
-                            value="HTML"
-                          />
-                        </div>
-
-                        <div className="flex items-center">
-                          <label for="html ">Stripe</label>
-                          <div className="w-[30px] ml-2">
-                            <FaStripeS />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center ">
-                        <div className="w-[30px]">
-                          <input
-                            type="radio"
-                            id="html"
-                            name="fav_language"
-                            value="HTML"
-                          />
-                        </div>
-
-                        <div className="flex items-center">
-                          <label for="html ">Razor Pay</label>
-                          <div className="w-[30px] ml-2">
-                            <SiRazorpay />
-                          </div>
-                        </div>
-                      </div>
-                      <br /> 
-                      <div className="">
-                        <form className="flex flex-wrap gap-3 w-full p-5">
-                          <label className="relative w-full flex flex-col">
-                            <span className="font-bold mb-3">Card number</span>
-                            <input
-                              className="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
-                              type="text"
-                              name="card_number"
-                              placeholder="0000 0000 0000"
-                            />
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                              />
-                            </svg>
-                          </label>
-                          <label className="relative w-full flex flex-col">
-                            <span className="font-bold mb-3">Expire date</span>
-                            <input
-                              className="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
-                              type="text"
-                              name="expire_date"
-                              placeholder="MM/YY"
-                            />
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                              />
-                            </svg>
-                          </label>
-                          <label className="relative w-full flex flex-col">
-                            <span className="font-bold flex items-center gap-3 mb-3">
-                              CVV
-                              <span className="relative group">
-                                <span className="hidden group-hover:flex justify-center items-center px-2 py-1 text-xs absolute -right-2 transform translate-x-full -translate-y-1/2 w-max top-1/2 bg-black text-white">
-                                  Turn your card over and look at the CVV
-                                </span>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-4 w-4"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                  />
-                                </svg>
-                              </span>
-                            </span>
-                            <input
-                              className="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
-                              type="text"
-                              name="card_cvc"
-                              placeholder="•••"
-                            />
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                              />
-                            </svg>
-                          </label>
-                        </form>
-                      </div>
-                      <div className="mt-8 text-center">
-                        <button
-                          className="bg-[#165461] p-2 font-semibold text-[white] hover:bg-[white] hover:text-[#165461] "
-                          style={{ border: "1px solid #215E6A" }}
-                          onClick={() => handleCheckout()}
-                        >
-                          Checkout
-                        </button>
-                      </div>
-                    </div>
-                    {/* ------------- */}
-                  </div>
+              <div className="md:w-1/2 w-full m-2   text-[#393C3F] font-semibold md:p-6   bg-[#FAFAFA] rounded-[5px]">
+                <div className="text-center items-center">
+                  <button
+                    className="btn btn-success w-full font-bold    "
+                    onClick={() => setHiddendiv(!hiddendiv)}
+                  >
+                    Checkout
+                  </button>
                 </div>
+                {hiddendiv ? (
+                  <>
+                    <motion.div
+                      initial={{ y: -10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -10, opacity: 0 }}
+                      transition={{ duration: 0.7, stiffness: 500 }}
+                      className="mt-12"
+                    >
+                      <PayPalScriptProvider>
+                        <PayPalButtons
+                          createOrder={(data, actions) => {
+                            return actions.order.create({
+                              purchase_units: [
+                                {
+                                  amount: {
+                                    value: paypal_payment,
+                                  },
+                                },
+                              ],
+                            });
+                          }}
+                          onApprove={(data, actions) => {
+                            return actions.order
+                              .capture()
+                              .then(function (details) {
+                                handleSuccess(details);
+                                console.log(details);
+                                alert(
+                                  "Transaction completed by " +
+                                    details.payer.name.given_name
+                                );
+                                // Call your server to save the transaction
+                              })
+                              .catch((err) => {
+                                console.log(err);
+                              });
+                          }}
+                        />
+                      </PayPalScriptProvider>
+                    </motion.div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mt-16">
+                      <img src={ck} alt="" srcset="" />
+                    </div>
+                    <div className="mt-14 text-center   ">
+                      <span className="text-[20px]">Clcik&nbsp;</span>
+                      <span className="font-bold text-[20px]">Checkout</span>
+                      <span className="text-[20px]"> to purchase Plan</span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

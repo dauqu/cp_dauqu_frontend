@@ -94,11 +94,9 @@ function SecondHeader() {
                     });
                   }}
                 >
-                  <a href="javascript:void(0)">Contact US</a>
+                  <a href="javascript:void(1)">Contact US</a>
                 </li>
-                {/* <li className="text-[white] hover:cursor-pointer ">
-                    <a href="javascript:void(0)">Contact US</a>
-                  </li> */}
+
                 {user.length == 0 ? (
                   <Link to="/login">
                     <li className="btn btn-ghost text-[white] hover:cursor-pointer p-2   ">
