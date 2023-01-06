@@ -1,25 +1,90 @@
-import { data } from "autoprefixer";
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import loginplease from "../assets/images/loginPlease.jpg";
 import SecondHeader from "./SecondHeader";
-import { BiPowerOff } from "react-icons/bi";
-import { BsFillPatchCheckFill } from "react-icons/bs";
-import { ImCross } from "react-icons/im";
 import { AiFillHome, AiFillSetting, AiTwotoneSetting } from "react-icons/ai";
-import { FiMonitor } from "react-icons/fi";
-import { BsHandbagFill } from "react-icons/bs";
-import { MdNotifications } from "react-icons/md";
 import { FaKey, FaUserAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { API } from "./Constant";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import { BsFillPatchCheckFill } from "react-icons/bs";
 function Profile() {
-  const { id } = useParams();
+  const [showModal, setShowModal] = useState(false); // modal for password update
+  const [userSettingModal, setUserSettingModal] = useState(false); // modal for user Account setting
+  const [toastify_psw, setToastify_psw] = useState(false); // toastify for password update success
+  const [toastify_psw_err, setToastify_psw_err] = useState(false); // toastify for password update error
+  const [toastify_user, setToastify_user] = useState(false); // toastify for user account setting success
+  const [toastify_user_err, setToastify_user_err] = useState(false); // toastify for user account setting error
+  const [user, setUser] = useState("");
+  const [old_password, setOld_password] = useState("");
+  const [new_password, setNew_password] = useState("");
+  const [confirm_password, setConfirm_password] = useState("");
 
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [country, setCountry] = useState("");
+
+  // for success toastify password update
+  const notify_psw = () => {
+    toast.success("Password Updated Successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  // for error toastify password update
+  const notify_psw_err = () => {
+    toast.error("Password Update Error", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  // for success toastify user account setting
+  const notify_user = () => {
+    toast.success("Settings Updated", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  // for error toastify user account setting error
+  const notify_user_err = () => {
+    toast.error("Settings Update Error", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
   // scrool to top function
   const scrollToTop = () => {
     window.scrollTo({
@@ -31,12 +96,7 @@ function Profile() {
     scrollToTop();
   }, []);
 
-  // handleLogout
-  const HandleUpdate = () => {
-    window.alert("This feature will be available soon.");
-  };
   // getting data of user profile from profile api
-  const [user, setUser] = useState("");
   // console.log(setUser.length);
   async function GetUsers() {
     try {
@@ -44,28 +104,119 @@ function Profile() {
         withCredentials: true,
       });
       setUser(response.data.data);
-      console.log(response.data.data);
+      // console.log(response.data.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
   React.useEffect(() => {
     GetUsers();
   }, []);
-
   //   logout function
   async function UserLogut() {
     try {
       const resp = await axios.get(`${API}/logout`, {
         withCredentials: true,
       });
-      console.log(resp.data);
-      console.log("logout done");
+      // console.log(resp.data);
+      // console.log("logout done");
       window.location.href = "/";
     } catch (error) {
       console.log(error);
     }
   }
+  // password update function
+
+  const _id = user._id;
+  // console.log(_id);
+
+  const handlePasswordUpdate = async () => {
+    try {
+      await axios
+        .patch(
+          `${API}/getuser/update/password/${_id}`,
+          {
+            old_password: old_password,
+            new_password: new_password,
+            confirm_password: confirm_password,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          // console.log(res.data);
+          setToastify_psw(true);
+          notify_psw();
+          // window.location.href = "/profile";
+        })
+        .catch((err) => {
+          // console.log(err);
+          setToastify_psw_err(true);
+          notify_psw_err();
+        });
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+
+  // code to get user by id
+  const getUserById = async () => {
+    await axios
+      .get(`${API}/getuser/${user._id}`)
+      .then((res) => {
+        let info = res.data;
+
+        setName(info.name);
+        setUsername(info.username);
+        setEmail(info.email);
+        setPhone(info.phone);
+        setAddress(info.address);
+        setCountry(info.country);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getUserById();
+  }, [user._id]);
+
+  // code to update user
+  const handleUserUpdate = async (e) => {
+    e.preventDefault();
+
+    axios
+      .patch(
+        `${API}/getuser/update/user/${user._id}`,
+        {
+          name,
+          username,
+          email,
+          phone,
+          address,
+          country,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        // console.log(res.data);
+        // window.alert("user updated successfully");
+        setToastify_user(true);
+        notify_user();
+        setTimeout(() => {
+          window.location.href = "/profile";
+        }, [2000]);
+      })
+      .catch((err) => {
+        console.log(err);
+        setToastify_user_err(true);
+        notify_user_err();
+        // window.alert("user not updated");
+      });
+  };
 
   return (
     <div>
@@ -111,7 +262,10 @@ function Profile() {
                     </button>
                   </div>
                   <div className="">
-                    <button className="border w-full text-center text-[#342B3D] flex items-center   hover:bg-[#165461] justify-center hover:text-[white]  p-4 ">
+                    <button
+                      className="border w-full text-center text-[#342B3D] flex items-center   hover:bg-[#165461] justify-center hover:text-[white]  p-4 "
+                      onClick={() => setUserSettingModal(!userSettingModal)}
+                    >
                       <div className="w-[30px]">
                         <AiFillSetting size={18} />
                       </div>
@@ -121,7 +275,7 @@ function Profile() {
                   <div className="">
                     <button
                       className="border w-full text-center text-[#342B3D] flex items-center   hover:bg-[#165461] justify-center hover:text-[white]  p-4 "
-                      onClick={() => HandleUpdate()}
+                      onClick={() => setShowModal(!showModal)}
                     >
                       <div className="w-[30px]">
                         <FaKey />
@@ -214,6 +368,346 @@ function Profile() {
                 </div>
               </div>
             </div>
+            {/* -----------------MODAL POPUP FOR PASSWORD UPDATE------------------ */}
+            {showModal ? (
+              <>
+                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                  <div className="relative w-auto md:my-6 my-24 md:mt-0 mt-[350px] md:p-0 p-4 mx-auto max-w-3xl">
+                    {/*content*/}
+                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                      {/*header*/}
+                      <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                        <h3 className="text-3xl font-semibold">
+                          Update Password
+                        </h3>
+
+                        <button
+                          className="btn btn-circle btn-sm btn-outline  hover:bg-[#05232A] p-1 ml-auto     text-black  float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
+                          onClick={() => setShowModal(false)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                      {/*body*/}
+                      <div className="relative p-6  ">
+                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                          You can update your password here by entering your old
+                          password and new password.
+                        </p>
+                        <div className="flex flex-col">
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              Old Password
+                            </label>
+                            <input
+                              type="password"
+                              placeholder="Old Password"
+                              name={old_password}
+                              onChange={(e) => setOld_password(e.target.value)}
+                              className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-col mt-4">
+                            <label className="leading-loose">
+                              New Password
+                            </label>
+                            <input
+                              type="password"
+                              placeholder="New Password"
+                              name={new_password}
+                              onChange={(e) => setNew_password(e.target.value)}
+                              className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-col mt-4">
+                            <label className="leading-loose">
+                              Confirm Password
+                            </label>
+                            <input
+                              type="password"
+                              placeholder="Confirm Password"
+                              name={confirm_password}
+                              onChange={(e) =>
+                                setConfirm_password(e.target.value)
+                              }
+                              className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      {/*footer*/}
+                      <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                        <button
+                          className="text-red-600  border hover:border hover:border-rose-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                          type="button"
+                          onClick={() => setShowModal(false)}
+                        >
+                          Close
+                        </button>
+                        <button
+                          className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                          type="button"
+                          onClick={() => handlePasswordUpdate()}
+                        >
+                          Save Changes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+              </>
+            ) : null}
+            <div>
+              {
+                // -----------------MODAL POPUP FOR PROFILE UPDATE------------------
+                userSettingModal ? (
+                  <>
+                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                      <div className="relative w-auto  md:my-6 my-24 md:mt-0 mt-[350px] mx-auto max-w-3xl md:p-0 p-4">
+                        {/*content*/}
+                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                          {/*header*/}
+                          <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                            <h3 className="text-3xl font-semibold">
+                              Account Settings
+                            </h3>
+                            <button
+                              className="btn btn-circle btn-sm btn-outline  hover:bg-[#05232A] p-1 ml-auto     text-black  float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
+                              onClick={() => setUserSettingModal(false)}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M6 18L18 6M6 6l12 12"
+                                />
+                              </svg>
+                            </button>
+                          </div>
+                          {/*body*/}
+                          <div className="relative p-6  ">
+                            <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                              You can update your profile here by entering your
+                              new details.
+                            </p>
+                            {/* grid coloumns for input */}
+                            <form
+                              className="w-full max-w-lg"
+                              onSubmit={(e) => handleUserUpdate(e)}
+                            >
+                              <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                  <label
+                                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    htmlFor="grid-first-name"
+                                  >
+                                    Name
+                                  </label>
+                                  <input
+                                    className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                                    id="grid-first-name"
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                  />
+                                </div>
+                                <div className="w-full md:w-1/2 px-3">
+                                  <label
+                                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    htmlFor="grid-last-name"
+                                  >
+                                    Username
+                                  </label>
+                                  <input
+                                    className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                                    id="grid-last-name"
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) =>
+                                      setUsername(e.target.value)
+                                    }
+                                  />
+                                </div>
+                              </div>
+                              <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                  <label
+                                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    htmlFor="grid-first-name"
+                                  >
+                                    Email
+                                  </label>
+                                  <input
+                                    className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                                    id="grid-first-name"
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                  />
+                                </div>
+                                <div className="w-full md:w-1/2 px-3">
+                                  <label
+                                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    htmlFor="grid-last-name"
+                                  >
+                                    Phone
+                                  </label>
+                                  <input
+                                    className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                                    id="grid-last-name"
+                                    type="number"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                  />
+                                </div>
+                              </div>
+                              <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                  <label
+                                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    htmlFor="grid-first-name"
+                                  >
+                                    Country
+                                  </label>
+                                  <input
+                                    className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                                    id="grid-first-name"
+                                    type="text"
+                                    value={country}
+                                    onChange={(e) => setCountry(e.target.value)}
+                                  />
+                                </div>
+                                <div className="w-full md:w-1/2 px-3">
+                                  <label
+                                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    htmlFor="grid-last-name"
+                                  >
+                                    Address
+                                  </label>
+                                  <input
+                                    className="appearance-none block w-full bg-[#ebebeb54] text-gray-700 border border-gray-200 rounded py-3 px-4  focus:outline-none   focus:border-gray-500"
+                                    id="grid-last-name"
+                                    type="text"
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                  />
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          {/*footer*/}
+                          <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                            <button
+                              className="text-red-600  border hover:border hover:border-rose-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-1500"
+                              type="button"
+                              onClick={() => setUserSettingModal(false)}
+                            >
+                              Close
+                            </button>
+                            <button
+                              className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                              type="button"
+                              onClick={(e) => handleUserUpdate(e)}
+                            >
+                              Save Changes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                  </>
+                ) : null
+              }
+            </div>
+            {/* toastify for password update success */}
+            {toastify_psw ? (
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+              />
+            ) : null}
+
+            {/* toastify for password update error */}
+            {toastify_psw_err ? (
+              <>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="dark"
+                />
+              </>
+            ) : null}
+            {/* toastify foruser account update success */}
+            {toastify_user ? (
+              <>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="dark"
+                />
+              </>
+            ) : null}
+            {/* toastify for user account update error */}
+            {toastify_user_err ? (
+              <>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="dark"
+                />
+              </>
+            ) : null}
           </section>
         </motion.div>
       ) : (

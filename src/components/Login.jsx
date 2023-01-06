@@ -6,7 +6,8 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { API } from "./Constant";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const scrollToTop = () => {
     window.scrollTo({
@@ -20,7 +21,19 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [toastify, setToastify] = useState(false);
+  // toastify
+  const notify = () =>
+    toast.error("Login Failed", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   // axios post request fuction for login
   async function PostLogin() {
     const response = await axios
@@ -35,13 +48,21 @@ function Login() {
         }
       )
       .then((res) => {
-        console.log(res);
-        alert("Login Successfull");
-        window.location.href = "/profile";
+        console.log(res.data);
+        if (res.data.message === "login success") {
+          console.log("Login Successfull");
+          window.location.href = "/profile";
+        } else {
+          console.log("Login Failed");
+          setToastify(true);
+        }
       })
       .catch((err) => {
         console.log(err);
-        alert("Login Failed");
+        setToastify(!toastify);
+        notify();
+        console.log("Login Failed");
+        // alert("Login Failed");
       });
   }
 
@@ -70,11 +91,27 @@ function Login() {
                   alt="Sample image"
                 />
               </div>
-
+              {toastify ? (
+                <ToastContainer
+                  position="top-right"
+                  autoClose={2000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="colored"
+                ></ToastContainer>
+              ) : null}
+              {/* <button onClick={notify}>Notify!</button>
+              <ToastContainer /> */}
               <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                 <form className="pb-[50px]">
                   <div className="flex flex-row items-center justify-center lg:justify-start">
                     <p className="text-lg mb-0 mr-4">Sign in with</p>
+
                     <button
                       type="button"
                       data-mdb-ripple="true"

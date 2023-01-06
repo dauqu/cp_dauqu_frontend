@@ -8,7 +8,6 @@ import ImgSlider from "./components/ImgSlider";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Newprofile from "./components/Newprofile";
-import PayPal from "./components/Pament_Gateway/PayPal";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 import Slider from "./components/Slider";
@@ -35,7 +34,6 @@ function App() {
         <Route path="/newprofile" element={<Newprofile />} />
         <Route path="/cart/:slug" element={<Cart />} />
         <Route path="/navbar" element={<Navbar />} />
-        <Route path="/paypal" element={<PayPal />} />
       </Routes>
     </>
   );

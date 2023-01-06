@@ -94,6 +94,18 @@ function Body() {
     handlePlans();
   }, []);
 
+// code for copy to clipboard
+  // const copyToClipboard = (e) => {
+  //   var textField = document.createElement("textarea");
+  //   textField.innerText = e;
+  //   document.body.appendChild(textField);
+  //   textField.select();
+  //   document.execCommand("copy");
+  //   textField.remove();
+  // };
+
+
+
   return (
     <motion.div
       initial={{ y: -10, opacity: 0 }}

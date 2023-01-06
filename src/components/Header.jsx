@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { FlatTree, motion } from "framer-motion";
 import { useEffect } from "react";
 
 import { FaPlayCircle, FaShoppingCart } from "react-icons/fa";
@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import "../assets/css/Header.css";
 import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { GiCheckMark } from "react-icons/gi";
 function Header() {
   const scrollToTop = () => {
     window.scrollTo({
@@ -39,19 +40,15 @@ function Header() {
     GetUsers();
   }, []);
 
-  // code to copy text to clipboard on click of button
-  const [value, setValue] = React.useState("https://dauqu.com");
-  const [copied, setCopied] = React.useState(false);
-  const onCopy = () => {
-    setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  };
-
   const [navbar, setNavbar] = useState(false);
   const [clipboard, setClipboard] = useState(false);
+  const [copied, setcopied] = useState(false);
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(
+      `wget https://dauqu.com/install.sh && ./install.sh`
+    );
+    setcopied(true);
+  };
   return (
     <>
       <div className="mainheader bg-[#165461]    ">
@@ -173,14 +170,7 @@ function Header() {
             <div className="text-white p-2 font-bold lg:text-[40px] text-[25px] mt-10 sm:mt-0">
               Deploy your app in minutes with Dauqu
             </div>
-            {/* <div className="md:hidden lg:hidden block p-4 ">
-              <button
-                onClick={() => setClipboard(!clipboard)}
-                className="btn btn-outline btn-accent rounded-none btn-sm"
-              >
-                Install Now
-              </button>
-            </div> */}
+
             <div className="  text-[#B1CBCF] text-[17px] md:w-1/2 m-auto text-center mt-5">
               Using Dauqu you can deploy your app in minutes. Dauqu is a cloud
               based platform that allows you to deploy your app in minutes.
@@ -205,9 +195,21 @@ function Header() {
                   wget https://dauqu.com/install.sh && ./install.sh
                 </div>
                 <div className="w-auto  text-center items-center">
-                  <button className="btn btn-outline btn-accent flex items-center rounded-none btn-sm">
-                    Copy &nbsp; <BiCopy />
-                  </button>
+                  {copied ? (
+                    <button
+                      className="btn btn-outline btn-accent flex items-center rounded-none btn-sm"
+                      onClick={copyToClipboard}
+                    >
+                      Link Copied &nbsp; <GiCheckMark />
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-outline btn-accent flex items-center rounded-none btn-sm"
+                      onClick={copyToClipboard}
+                    >
+                      Copy &nbsp; <BiCopy />
+                    </button>
+                  )}
                 </div>
               </motion.div>
             ) : null}
