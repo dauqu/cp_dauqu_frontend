@@ -45,6 +45,8 @@ function Cart() {
   React.useEffect(() => {
     GetUsers();
   }, []);
+  const user_uniqueKey = user.uniqueKey;
+  // console.log(user_uniqueKey);
 
   const { slug } = useParams();
   const [cart, setCart] = useState({});
@@ -65,7 +67,7 @@ function Cart() {
   }, [slug]);
 
   const paypal_payment = cart.plan_price;
-  console.log(paypal_payment);
+  // console.log(paypal_payment);
   const [successPayment, setSuccessPayment] = useState([]);
   // code to post success payment response to backend
   const handleSuccess = (details) => {
@@ -83,6 +85,8 @@ function Cart() {
         city: details.payer.address.admin_area_2,
         country: details.payer.address.country_code,
         order_status: details.status,
+        userUniqueKey: user_uniqueKey,
+        months: cart.plan_duration
       })
       .then((res) => {
         console.log(res);

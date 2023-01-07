@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-dom";
 import { API } from "./Constant";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SubscibedPlan from "./SubscibedPlan";
 // import { BsFillPatchCheckFill } from "react-icons/bs";
 function Profile() {
   const [showModal, setShowModal] = useState(false); // modal for password update
@@ -287,7 +288,7 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="border w-full sm:p-12 p-8">
+              <div className="border w-full sm:p-12 md:p-8 p-2">
                 <div className="flex items-center justify-between ">
                   <div className="text-[25px] text-[#342B3D] font-bold">
                     Account
@@ -368,8 +369,11 @@ function Profile() {
                     </div>
                   </div>
                 </div>
+                {/*---------------- order details of user with conditional rendering  --------------------*/}
+                <SubscibedPlan />
               </div>
             </div>
+
             {/* -----------------MODAL POPUP FOR PASSWORD UPDATE------------------ */}
             {showModal ? (
               <>
@@ -643,6 +647,7 @@ function Profile() {
                 ) : null
               }
             </div>
+
             {/* toastify for password update success */}
             {toastify_psw ? (
               <ToastContainer

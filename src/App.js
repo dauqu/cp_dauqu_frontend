@@ -12,6 +12,7 @@ import Profile from "./components/Profile";
 import Register from "./components/Register";
 import Slider from "./components/Slider";
 import StripePayment from "./components/StripePayment";
+import SubscibedPlan from "./components/SubscibedPlan";
 import Test from "./components/Test";
 import Update_psw from "./components/Update_psw";
 // allow axios credentials
@@ -34,6 +35,7 @@ function App() {
         <Route path="/newprofile" element={<Newprofile />} />
         <Route path="/cart/:slug" element={<Cart />} />
         <Route path="/navbar" element={<Navbar />} />
+        <Route path="/subs" element={<SubscibedPlan />} />
       </Routes>
     </>
   );

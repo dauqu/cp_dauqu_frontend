@@ -528,9 +528,9 @@ function Body() {
               </div> */}
                   <hr className="mt-4" />
                   <div className=" mt-4 text-left">Dauqu</div>
-                  <div className="mt-2 text-left">
+                  {/* <div className="mt-2 text-left">
                     {plan.plan_transaction_fee}% transaction fee
-                  </div>
+                  </div> */}
                 </div>
               </>
             ))}
