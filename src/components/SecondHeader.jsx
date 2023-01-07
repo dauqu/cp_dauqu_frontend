@@ -83,18 +83,8 @@ function SecondHeader() {
                   <Link to="/">Home</Link>
                 </li>
 
-                <li
-                  className="btn btn-ghost text-[white] hover:cursor-pointer p-2   "
-                  onClick={() => {
-                    //Scroll to bottom
-                    window.scroll({
-                      top: document.body.offsetHeight,
-                      left: 0,
-                      behavior: "smooth",
-                    });
-                  }}
-                >
-                  <a href="javascript:void(1)">Contact US</a>
+                <li className="btn btn-ghost text-[white] hover:cursor-pointer p-2   ">
+                  Contact US
                 </li>
 
                 {user.length == 0 ? (
@@ -105,9 +95,11 @@ function SecondHeader() {
                   </Link>
                 ) : (
                   <>
-                    <li className="text-[white] hover:cursor-pointer p-2   ">
-                      <Link to="/profile">Profile</Link>
-                    </li>
+                    <Link to="/profile">
+                      <li className="btn btn-ghost text-[white] hover:cursor-pointer p-2    ">
+                        Profile
+                      </li>
+                    </Link>
                   </>
                 )}
               </ul>

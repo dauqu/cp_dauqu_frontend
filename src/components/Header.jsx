@@ -132,9 +132,11 @@ function Header() {
                     </Link>
                   ) : (
                     <>
-                      <li className="text-[white] hover:cursor-pointer p-2   ">
-                        <Link to="/profile">Profile</Link>
-                      </li>
+                      <Link to="/profile">
+                        <li className="btn btn-ghost text-[white] hover:cursor-pointer p-2    ">
+                          Profile
+                        </li>
+                      </Link>
                     </>
                   )}
                 </ul>

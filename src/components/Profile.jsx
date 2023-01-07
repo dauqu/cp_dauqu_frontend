@@ -175,7 +175,9 @@ function Profile() {
         setCountry(info.country);
       })
       .catch((err) => {
-        console.log(err);
+        setTimeout(() => {
+          console.log(err);
+        }, [5000]);
       });
   };
   useEffect(() => {

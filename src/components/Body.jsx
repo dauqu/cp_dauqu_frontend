@@ -48,28 +48,6 @@ import { API } from "./Constant";
 import { Link } from "react-router-dom";
 
 function Body() {
-  // stripe payment gateway code strat from here------------------------
-  const plan1 = 15,
-    plan2 = 25,
-    plan3 = 35,
-    plan4 = 45;
-
-  const handleToken = (token) => {
-    fetch("http://localhost:4000/api/stripepayment/donate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token, plan1, plan2, plan3, plan4 }),
-    })
-      .then((res) => res.json())
-      .then((_) => {
-        window.alert("Transaction Successful.");
-      })
-      .catch((_) => window.alert("Transaction Failed."));
-  };
-  // stripe payment gateway code end here------------------------
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -85,7 +63,7 @@ function Body() {
     try {
       const res = await axios.get(`${API}/plans`);
       setPlans(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -94,7 +72,7 @@ function Body() {
     handlePlans();
   }, []);
 
-// code for copy to clipboard
+  // code for copy to clipboard
   // const copyToClipboard = (e) => {
   //   var textField = document.createElement("textarea");
   //   textField.innerText = e;
@@ -103,8 +81,6 @@ function Body() {
   //   document.execCommand("copy");
   //   textField.remove();
   // };
-
-
 
   return (
     <motion.div
@@ -277,7 +253,7 @@ function Body() {
               className="p-2 bg-slate-500 rounded "
             />
           </div>
-          <div className="lg:w-1/2 w-full lg:m-4 m-0">
+          <div className="lg:w-1/2 md:pt-0 pt-6 w-full lg:m-4 m-0">
             <img
               src={ss3}
               style={{ width: "100%" }}
@@ -493,7 +469,7 @@ function Body() {
           <div className=""></div>
           <div className="flex flex-col md:flex-row  items-center   m-auto justify-center">
             {/* map funtion */}
-            {plans.map((plan) => (
+            {plans.map((plan, key) => (
               <>
                 <div className="cardd m-4 shadow-md border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
                   <div className="text-[#22616C] font-semibold mt-4">

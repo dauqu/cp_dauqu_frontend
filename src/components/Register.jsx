@@ -5,8 +5,20 @@ import SecondHeader from "./SecondHeader";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+
 import { API } from "./Constant";
 function Register() {
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [country, setCountry] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [image, setImage] = useState("");
+  const [toastify, setToastify] = useState(false); // toastify state
+  const [toastifySuccess, setToastifySuccess] = useState(false); // toastify state for success
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -17,14 +29,28 @@ function Register() {
     scrollToTop();
   }, []);
 
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [country, setCountry] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [password, setPassword] = useState("");
-  const [image, setImage] = useState("");
+  const notify = () =>
+    toast.error("Invalid Details!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+
+  const notifySuccess = () =>
+    toast.success("Registered Successfully!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   // axios signup function
   const handleSubmit = (e) => {
@@ -43,10 +69,16 @@ function Register() {
       .post(`${API}/signup`, formData)
       .then((res) => {
         console.log(res);
+        if (res.status == 200) {
+          setToastifySuccess(true);
+          notifySuccess();
+        }
       })
       .catch((err) => {
         console.log(err);
-        alert("Invalid Credentials");
+        // alert("Invalid Credentials");
+        setToastify(true);
+        notify();
       });
   };
 
@@ -177,6 +209,22 @@ function Register() {
               </div>
             </div>
           </div>
+          {toastify ? (
+            <>
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+              />
+            </>
+          ) : null}
         </section>
       </motion.div>
     </div>
