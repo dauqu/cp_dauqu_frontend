@@ -11,6 +11,7 @@ import "../assets/css/Header.css";
 import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { GiCheckMark } from "react-icons/gi";
+import { API } from "./Constant";
 function Header() {
   const scrollToTop = () => {
     window.scrollTo({
@@ -27,7 +28,7 @@ function Header() {
   // console.log(setUser.length);
   async function GetUsers() {
     try {
-      const response = await axios.get("http://localhost:4000/api/profile", {
+      const response = await axios.get(`${API}/profile`, {
         withCredentials: true,
       });
       setUser(response.data);

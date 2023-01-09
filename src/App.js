@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import Newprofile from "./components/Newprofile";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
+import SecondHeader from "./components/SecondHeader";
 import Slider from "./components/Slider";
 import StripePayment from "./components/StripePayment";
 import SubscibedPlan from "./components/SubscibedPlan";
@@ -36,6 +37,7 @@ function App() {
         <Route path="/cart/:slug" element={<Cart />} />
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/subs" element={<SubscibedPlan />} />
+        <Route path="/ss" element={<SecondHeader />} />
       </Routes>
     </>
   );

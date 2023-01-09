@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { FaShoppingCart } from "react-icons/fa";
+import { API } from "./Constant";
 
 function SecondHeader() {
   // --------------
@@ -10,7 +11,7 @@ function SecondHeader() {
   // console.log(user.length);
   async function GetUsers() {
     try {
-      const response = await axios.get("http://localhost:4000/api/profile", {
+      const response = await axios.get(`${API}/profile`, {
         withCredentials: true,
       });
       setUser(response.data);
@@ -24,7 +25,7 @@ function SecondHeader() {
   }, []);
 
   const [navbar, setNavbar] = useState(false);
-
+  console.log(user.length);
   return (
     <div className="  bg-[#165461]  fixed top-0 w-full   ">
       <nav className="w-full bg-[#01232a] ">
@@ -94,13 +95,11 @@ function SecondHeader() {
                     </li>
                   </Link>
                 ) : (
-                  <>
-                    <Link to="/profile">
-                      <li className="btn btn-ghost text-[white] hover:cursor-pointer p-2    ">
-                        Profile
-                      </li>
-                    </Link>
-                  </>
+                  <Link to="/profile">
+                    <li className="btn btn-ghost text-[white] hover:cursor-pointer p-2    ">
+                      Profile
+                    </li>
+                  </Link>
                 )}
               </ul>
             </div>

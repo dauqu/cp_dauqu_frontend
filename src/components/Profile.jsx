@@ -105,7 +105,7 @@ function Profile() {
         withCredentials: true,
       });
       setUser(response.data.data);
-      // console.log(response.data.data);
+      console.log(response.data.data);
     } catch (error) {
       // console.log(error);
     }
@@ -134,14 +134,11 @@ function Profile() {
   const handlePasswordUpdate = async () => {
     try {
       await axios
-        .patch(
-          `${API}/getuser/update/password/${_id}`,
-          {
-            old_password: old_password,
-            new_password: new_password,
-            confirm_password: confirm_password,
-          } 
-        )
+        .patch(`${API}/getuser/update/password/${_id}`, {
+          old_password: old_password,
+          new_password: new_password,
+          confirm_password: confirm_password,
+        })
         .then((res) => {
           // console.log(res.data);
           setToastify_psw(true);
@@ -160,6 +157,7 @@ function Profile() {
 
   // code to get user by id
   const getUserById = async () => {
+    if (user._id === undefined) return;
     await axios
       .get(`${API}/getuser/${user._id}`)
       .then((res) => {
@@ -187,17 +185,14 @@ function Profile() {
     e.preventDefault();
 
     axios
-      .patch(
-        `${API}/getuser/update/user/${user._id}`,
-        {
-          name,
-          username,
-          email,
-          phone,
-          address,
-          country,
-        } 
-      )
+      .patch(`${API}/getuser/update/user/${user._id}`, {
+        name,
+        username,
+        email,
+        phone,
+        address,
+        country,
+      })
       .then((res) => {
         // console.log(res.data);
         // window.alert("user updated successfully");

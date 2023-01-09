@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
+import { API } from "./Constant";
 function StripePayment() {
-//   const [amount, setAmount] = useState(0);
-    const amount=150
+  //   const [amount, setAmount] = useState(0);
+  const amount = 150;
   const handleToken = (token) => {
-    fetch("http://localhost:4000/api/stripepayment/donate", {
+    fetch(`${API}/stripepayment/donate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,10 +20,10 @@ function StripePayment() {
       .catch((_) => window.alert("Transaction Failed."));
   };
 
-//   const handleAmountChange = (e) => {
-//     const value = e.target.value;
-//     setAmount(value);
-//   };
+  //   const handleAmountChange = (e) => {
+  //     const value = e.target.value;
+  //     setAmount(value);
+  //   };
 
   return (
     <div>
@@ -41,7 +42,7 @@ function StripePayment() {
         <form sx={{ m: 1 }}>
           <label htmlFor="outlined-adornment-amount">Amount</label>
           <input
-          className="border-2 p-2 shadow-xl"
+            className="border-2 p-2 shadow-xl"
             id="outlined-adornment-amount"
             value={amount}
             // onChange={handleAmountChange}

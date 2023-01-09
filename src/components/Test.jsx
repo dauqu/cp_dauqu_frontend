@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "../assets/css/Test.css";
+import { API } from "./Constant";
 
 function Test() {
   const [book, setBook] = useState({
@@ -21,7 +22,7 @@ function Test() {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const verifyUrl = "http://localhost:4000/api/payement/verify";
+          const verifyUrl = `${API}/payement/verify`;
           const { data } = await axios.post(verifyUrl, response);
           console.log(data);
         } catch (error) {
@@ -38,7 +39,7 @@ function Test() {
 
   const handlePayment = async () => {
     try {
-      const orderUrl = "http://localhost:4000/api/payement/orders";
+      const orderUrl = `${API}/payement/orders`;
       const { data } = await axios.post(orderUrl, { amount: book.price });
       console.log(data);
       initPayment(data.data);
