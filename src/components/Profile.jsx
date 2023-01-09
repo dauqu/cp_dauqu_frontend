@@ -140,10 +140,7 @@ function Profile() {
             old_password: old_password,
             new_password: new_password,
             confirm_password: confirm_password,
-          },
-          {
-            withCredentials: true,
-          }
+          } 
         )
         .then((res) => {
           // console.log(res.data);
@@ -199,10 +196,7 @@ function Profile() {
           phone,
           address,
           country,
-        },
-        {
-          withCredentials: true,
-        }
+        } 
       )
       .then((res) => {
         // console.log(res.data);

@@ -106,9 +106,11 @@ function SecondHeader() {
             </div>
           </div>
           <div className="min-w-[120px] hidden md:block">
-            <button className="btn btn-outline btn-accent rounded-none btn-sm">
-              Install Now
-            </button>
+            <Link to="/">
+              <button className="btn btn-outline btn-accent rounded-none btn-sm">
+                Install Now
+              </button>
+            </Link>
           </div>
         </div>
       </nav>

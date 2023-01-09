@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SecondHeader from "./SecondHeader";
 import { useEffect } from "react";
@@ -8,7 +8,9 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 import { API } from "./Constant";
+
 function Register() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [country, setCountry] = useState("");
@@ -44,7 +46,7 @@ function Register() {
   const notifySuccess = () =>
     toast.success("Registered Successfully!", {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -68,11 +70,14 @@ function Register() {
     const resp = axios
       .post(`${API}/signup`, formData)
       .then((res) => {
-        console.log(res);
-        if (res.status == 200) {
+        console.log(res.status);
+        if (res.status === 200) {
           setToastifySuccess(true);
           notifySuccess();
         }
+        setTimeout(() => {
+          navigate("/login");
+        }, [2500]);
       })
       .catch((err) => {
         console.log(err);
@@ -224,6 +229,20 @@ function Register() {
                 theme="dark"
               />
             </>
+          ) : null}
+          {toastifySuccess ? (
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
           ) : null}
         </section>
       </motion.div>
