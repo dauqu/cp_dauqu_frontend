@@ -122,7 +122,7 @@ function Body() {
             Testimonials
           </div>
           <div className="flex p-4 flex-col md:flex-row justify-evenly items-center   m-auto pt-8 w-full">
-            <div className="card md:m-2  md:mt:0 mt-4 md:w-96  w-78  m-auto bg-base-100 shadow-md">
+            <div className="card md:m-2  md:mt:0 mt-4 md:w-96  w-78  m-auto bg-base-100 ">
               <figure className="px-10 pt-10">
                 <BsCloudDownloadFill size={50} />
               </figure>
@@ -134,7 +134,7 @@ function Body() {
                 </div> */}
               </div>
             </div>
-            <div className="card md:m-2 md:mt:0 mt-4  md:w-96  w-78 bg-base-100 shadow-md">
+            <div className="card md:m-2 md:mt:0 mt-4  md:w-96  w-78 bg-base-100 ">
               <figure className="px-10 pt-10">
                 <FaUsers size={50} />
               </figure>
@@ -146,7 +146,7 @@ function Body() {
                 </div> */}
               </div>
             </div>
-            <div className="card md:m-2 md:mt:0 mt-4 md:w-96  w-78 bg-base-100 shadow-md">
+            <div className="card md:m-2 md:mt:0 mt-4 md:w-96  w-78 bg-base-100 ">
               <figure className="px-10 pt-10">
                 <GiElectric size={50} />
               </figure>
@@ -165,7 +165,7 @@ function Body() {
         <div className="bg-[#FAFAFA] items-center p-8 xl:p-16   ">
           <div className="items-center flex justify-center">
             <AiFillEye
-              className="shadow-lg"
+              className="shadow-sm"
               style={{
                 color: "#165461",
                 fontSize: "50px",
@@ -266,7 +266,7 @@ function Body() {
         <div className="bg-[#FAFAFA] p-3 xl:p-8">
           <div className="items-center flex justify-center">
             <AiFillSetting
-              className="shadow-lg"
+              className="shadow-sm"
               style={{
                 color: "#165461",
                 fontSize: "50px",
@@ -279,7 +279,7 @@ function Body() {
           </div>
           <div className="flex flex-col md:flex-row mt-8 p-8 items-center   m-auto  justify-evenly">
             <div className="card flex bg-[#FFFFFF] p-6 w-[350px]   my-5 md:my-0">
-              <div className="w-[20%]  ">
+              <div className="pb-4  m-auto  ">
                 <AiFillBulb
                   style={{
                     color: "#F9A901",
@@ -290,15 +290,15 @@ function Body() {
                 />
               </div>
               <div className="ml-4">
-                <div className="text-[#5C5C5C] text-[20px] font-bold">
+                <div className="text-[#5C5C5C] text-[20px] text-center pb-2 font-bold">
                   Creative Design
                 </div>
-                <div className="text-[#808080]">
+                <div className="text-[#808080] text-center">
                   Lorem ipsum dolor sit tus obcaecati reiciendis laborum?
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 text-center">
                   <button
-                    className="bg-[#FFFFFF] p-2 text-[#6A6A6A] hover:bg-[#165461] hover:text-white"
+                    className="bg-[#FFFFFF] p-2 text-[#6A6A6A] text-center hover:bg-[#165461] hover:text-white"
                     style={{ border: "1px solid #808080" }}
                   >
                     Learn More
@@ -307,7 +307,7 @@ function Body() {
               </div>
             </div>
             <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
-              <div className="w-[20%]  ">
+              <div className=" pb-4 m-auto  ">
                 <FaMobile
                   style={{
                     color: "#48CB8A",
@@ -318,13 +318,13 @@ function Body() {
                 />
               </div>
               <div className="ml-4">
-                <div className="text-[#5C5C5C] text-[20px] font-bold">
+                <div className="text-[#5C5C5C] text-center text-[20px] font-bold">
                   Fully Responsive
                 </div>
-                <div className="text-[#808080]">
+                <div className="text-[#808080] text-center">
                   Lorem ipsum dolor sit tus obcaecati reiciendis laborum?
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 text-center">
                   <button
                     className="bg-[#FFFFFF] p-2 text-[#6A6A6A] hover:bg-[#165461] hover:text-white"
                     style={{ border: "1px solid #808080" }}
@@ -335,24 +335,25 @@ function Body() {
               </div>
             </div>
             <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
-              <div className="w-[20%]  ">
+              <div className="pb-4 m-auto  ">
                 <FaEdit
                   style={{
                     color: "#831FFE",
                     fontSize: "40px",
                     background: "#F3E8FF",
                     padding: "4px",
+                    margin: "auto",
                   }}
                 />
               </div>
               <div className="ml-4">
-                <div className="text-[#5C5C5C] text-[20px] font-bold">
+                <div className="text-[#5C5C5C] text-center text-[20px] font-bold">
                   Creative Design
                 </div>
-                <div className="text-[#808080]">
+                <div className="text-[#808080] text-center">
                   Lorem ipsum dolor sit tus obcaecati reiciendis laborum?
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 text-center">
                   <button
                     className="bg-[#FFFFFF] p-2 text-[#6A6A6A] hover:bg-[#165461] hover:text-white"
                     style={{ border: "1px solid #808080" }}
@@ -365,7 +366,7 @@ function Body() {
           </div>
           <div className="flex flex-col md:flex-row mt-8 p-8 items-center   m-auto  justify-evenly">
             <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
-              <div className="w-[20%]  ">
+              <div className="pb-4 m-auto  ">
                 <FaDatabase
                   style={{
                     color: "#F78F71",
@@ -376,13 +377,13 @@ function Body() {
                 />
               </div>
               <div className="ml-4">
-                <div className="text-[#5C5C5C] text-[20px] font-bold">
+                <div className="text-[#5C5C5C] text-center text-[20px] font-bold">
                   Server Solutions
                 </div>
-                <div className="text-[#808080]">
+                <div className="text-[#808080] text-center">
                   Lorem ipsum dolor sit tus obcaecati reiciendis laborum?
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 text-center">
                   <button
                     className="bg-[#FFFFFF] p-2 text-[#6A6A6A] hover:bg-[#165461] hover:text-white"
                     style={{ border: "1px solid #808080" }}
@@ -393,7 +394,7 @@ function Body() {
               </div>
             </div>
             <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
-              <div className="w-[20%]  ">
+              <div className="pb-4 m-auto ">
                 <BiLink
                   style={{
                     color: "#165461",
@@ -404,13 +405,13 @@ function Body() {
                 />
               </div>
               <div className="ml-4">
-                <div className="text-[#5C5C5C] text-[20px] font-bold">
+                <div className="text-[#5C5C5C] text-center  text-[20px] font-bold">
                   Quick Link
                 </div>
-                <div className="text-[#808080]">
+                <div className="text-[#808080] text-center ">
                   Lorem ipsum dolor sit tus obcaecati reiciendis laborum?
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 text-center ">
                   <button
                     className="bg-[#FFFFFF] p-2 text-[#6A6A6A] hover:bg-[#165461] hover:text-white"
                     style={{ border: "1px solid #808080" }}
@@ -421,7 +422,7 @@ function Body() {
               </div>
             </div>
             <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
-              <div className="w-[20%]  ">
+              <div className="pb-4 m-auto">
                 <BsFillFileEarmarkCodeFill
                   style={{
                     color: "#1D86FF",
@@ -432,13 +433,13 @@ function Body() {
                 />
               </div>
               <div className="ml-4">
-                <div className="text-[#5C5C5C] text-[20px] font-bold">
+                <div className="text-[#5C5C5C] text-center  text-[20px] font-bold">
                   Well Documented
                 </div>
-                <div className="text-[#808080]">
+                <div className="text-[#808080] text-center ">
                   Lorem ipsum dolor sit tus obcaecati reiciendis laborum?
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 text-center ">
                   <button
                     className="bg-[#FFFFFF] p-2 text-[#6A6A6A] hover:bg-[#165461] hover:text-white"
                     style={{ border: "1px solid #808080" }}
@@ -455,7 +456,7 @@ function Body() {
         <div className="bg-[#FAFAFA] p-8  " id="plans">
           <div className="items-center flex justify-center">
             <AiFillDollarCircle
-              className="shadow-lg"
+              className="shadow-sm"
               style={{
                 color: "#165461",
                 fontSize: "50px",
@@ -471,7 +472,7 @@ function Body() {
             {/* map funtion */}
             {plans.map((plan, key) => (
               <>
-                <div className="cardd m-4 shadow-md border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
+                <div className="cardd m-4  border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
                   <div className="text-[#22616C] font-semibold mt-4">
                     {plan.plan_name}
                   </div>
@@ -535,7 +536,7 @@ function Body() {
               </>
             ))}
 
-            {/* <div className="cardd m-4 shadow-md border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
+            {/* <div className="cardd m-4  border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
               <div className="text-[#22616C] font-semibold mt-4">Standard</div>
               <div>
                 <span className="text[#222222] font-bold text-[40px] mt-4 ">
@@ -587,7 +588,7 @@ function Body() {
               <div className=" mt-4 text-left">Dauqu</div>
               <div className="mt-2 text-left">0% transaction fee</div>
             </div>
-            <div className="cardd m-4 shadow-md border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
+            <div className="cardd m-4  border w-[310px] mt-8 p-6 bg-[#FFFFFF] text-center  hover:scale-110 hover:transition-all hover:border-[#165461]  ">
               <div className="text-[#22616C] font-semibold mt-4">Pro</div>
               <div>
                 <span className="text[#222222] font-bold text-[40px] mt-4 ">
