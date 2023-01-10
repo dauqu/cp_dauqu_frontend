@@ -5,7 +5,10 @@ import img2 from "../assets/images/nf.png";
 import img3 from "../assets/images/en.png";
 import img4 from "../assets/images/sl.png";
 import { AiFillEye } from "react-icons/ai";
+import { FaDocker } from "react-icons/fa";
 import { GoCheck } from "react-icons/go";
+import { RiSecurePaymentFill } from "react-icons/ri";
+import { IoImagesSharp } from "react-icons/io5";
 import { BsFillCloudDownloadFill } from "react-icons/bs";
 import {
   FaGooglePlay,
@@ -16,7 +19,7 @@ import {
 } from "react-icons/fa";
 import { AiFillSetting, AiFillDollarCircle, AiFillStar } from "react-icons/ai";
 import { AiFillBulb } from "react-icons/ai";
-import { BiLink } from "react-icons/bi";
+import { BiCodeAlt, BiLink } from "react-icons/bi";
 import { BsFillFileEarmarkCodeFill } from "react-icons/bs";
 import { MdFormatQuote } from "react-icons/md";
 import user from "../assets/images/user.png";
@@ -40,8 +43,8 @@ import { useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import ImgSlider from "./ImgSlider";
 import ss2 from "../assets/images/ss2.png";
-import ss5 from "../assets/images/ss5.png";
-import ss3 from "../assets/images/ss3.png";
+import ss5 from "../assets/images/s_s11.png";
+import ss3 from "../assets/images/s_s13.png";
 import Icons_slider from "./Icons_slider";
 import axios from "axios";
 import { API } from "./Constant";
@@ -122,7 +125,7 @@ function Body() {
             Testimonials
           </div>
           <div className="flex p-4 flex-col md:flex-row justify-evenly items-center   m-auto pt-8 w-full">
-            <div className="card  rounded-none  md:m-2  md:mt:0 mt-4 md:w-96  w-78  m-auto bg-base-100 ">
+            <div className="card md:m-2  md:mt:0 mt-4 md:w-96  w-78  m-auto bg-base-100 ">
               <figure className="px-10 pt-10">
                 <BsCloudDownloadFill size={50} />
               </figure>
@@ -134,7 +137,7 @@ function Body() {
                 </div> */}
               </div>
             </div>
-            <div className="card  rounded-none  md:m-2 md:mt:0 mt-4  md:w-96  w-78 bg-base-100 ">
+            <div className="card md:m-2 md:mt:0 mt-4  md:w-96  w-78 bg-base-100 ">
               <figure className="px-10 pt-10">
                 <FaUsers size={50} />
               </figure>
@@ -146,7 +149,7 @@ function Body() {
                 </div> */}
               </div>
             </div>
-            <div className="card  rounded-none  md:m-2 md:mt:0 mt-4 md:w-96  w-78 bg-base-100 ">
+            <div className="card md:m-2 md:mt:0 mt-4 md:w-96  w-78 bg-base-100 ">
               <figure className="px-10 pt-10">
                 <GiElectric size={50} />
               </figure>
@@ -176,16 +179,19 @@ function Body() {
           <div className="text-[#333333] md:text-[40px] flex justify-center font-bold mb-6">
             Lets See How it Works
           </div>
-          <div className="flex flex-col md:flex-row justify-evenly items-center   m-auto pt-8 w-full">
-            <div className="bg-[#FFFFFF] p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0">
-              <div className="">
-                <img src={run} className="m-auto" alt="" />
+          <div className="flex flex-col md:flex-row justify-evenly items-stretch m-auto pt-8 w-full">
+            <div className="bg-[#FFFFFF] p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0 flex flex-col ">
+              <div className="bg-[#FEF4F1] p-6 m-4">
+                <BiCodeAlt size={30} />
               </div>
               <div className="text-[20px] font-bold text-[#333333] mt-2">
-                Manage Smartly
+                Get Code
               </div>
-              <div className="text-[15px] text-[#888888] mt-2">
-                Stay on the top of the game & Stay in touch with joy
+              <div className="text-[17px] text-justify text-[#888888] mt-2 grow ">
+                Code will get from Github: This step involves pulling the source
+                code for the admin panel from a Github repository. This allows
+                the panel to be easily updated and maintained, as well as
+                allowing multiple developers to collaborate on the project.
               </div>
               <div className=" mt-2">
                 <button className="bg-[#FFFFFF] border-2 border[#588992] p-2 text-[#588992] font-semibold hover:bg-[#165461] hover:text-white">
@@ -193,15 +199,19 @@ function Body() {
                 </button>
               </div>
             </div>
-            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0">
-              <div className="">
-                <img src={anl} className="m-auto" alt="" />
+            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0 flex flex-col">
+              <div className="bg-[#E6FAF4] p-6 m-4">
+                <IoImagesSharp size={30} />
               </div>
               <div className="text-[20px] font-bold text-[#333333] mt-2">
-                Monitor Analytics
+                Create Image
               </div>
-              <div className="text-[15px] text-[#888888] mt-2">
-                Stay on the top of the game & Stay in touch with joy
+              <div className="text-[17px] text-justify text-[#888888] mt-2 grow flex items-end flex-col">
+                Create Docker image in backend: Next, the source code is used to
+                create a Docker image, which is essentially a lightweight,
+                portable version of the admin panel that can be run on any
+                machine that has Docker installed. This step allows the panel to
+                be easily deployed to a variety of different environments.
               </div>
               <div className=" mt-2">
                 <button className="bg-[#FFFFFF] hover:bg-[#165461] hover:text-white border-2 border[#588992] p-2 text-[#588992] font-semibold">
@@ -209,15 +219,18 @@ function Body() {
                 </button>
               </div>
             </div>
-            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0">
-              <div className="">
-                <img src={trust} className="m-auto" alt="" />
+            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0 flex flex-col">
+              <div className="bg-[#FEF7E7] p-6 m-4">
+                <FaDocker size={30} />
               </div>
               <div className="text-[20px] font-bold text-[#333333] mt-2">
-                Sage & Trusted
+                Docker Container
               </div>
-              <div className="text-[15px] text-[#888888] mt-2">
-                Stay on the top of the game & Stay in touch with joy
+              <div className="text-[17px] text-justify text-[#888888] mt-2 grow ">
+                Run Container: After the Docker image is created, the next step
+                is to run a container using the image. A container is a running
+                instance of the image, and it allows the admin panel to be
+                accessed and used by the user.
               </div>
               <div className=" mt-2">
                 <button className="bg-[#FFFFFF] hover:bg-[#165461] hover:text-white border-2 border[#588992] p-2 text-[#588992] font-semibold">
@@ -225,15 +238,20 @@ function Body() {
                 </button>
               </div>
             </div>
-            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0">
-              <div className="">
-                <img src={lock} className="m-auto" alt="" />
+            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0 flex flex-col">
+              <div className="bg-[#F5E8FE] p-6 m-4">
+                <RiSecurePaymentFill size={30} />
               </div>
               <div className="text-[20px] font-bold text-[#333333] mt-2">
-                Fast Support
+                Proxy Link
               </div>
-              <div className="text-[15px] text-[#888888] mt-2">
-                Stay on the top of the game & Stay in touch with joy
+              <div className="text-[17px] text-justify text-[#888888] mt-2 grow">
+                Connect to domain with proxy: Once the container is running, the
+                final step is to connect it to a domain and proxy. A domain is a
+                unique name that identifies the admin panel on the internet,
+                while the proxy is used to route traffic to the container
+                running the panel. This allows the user to access the panel by
+                navigating to the domain in their web browser.
               </div>
               <div className=" mt-2">
                 <button className="bg-[#FFFFFF]  hover:bg-[#165461] hover:text-white border-2 border[#588992] p-2 text-[#588992] font-semibold">
@@ -278,7 +296,7 @@ function Body() {
             Easily Integrate with your favorite Services
           </div>
           <div className="flex flex-col md:flex-row mt-8 p-8 items-center   m-auto  justify-evenly">
-            <div className="card  rounded-none  first-letter:flex bg-[#FFFFFF] p-6 w-[350px]   my-5 md:my-0">
+            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]   my-5 md:my-0">
               <div className="pb-4  m-auto  ">
                 <AiFillBulb
                   style={{
@@ -306,7 +324,7 @@ function Body() {
                 </div>
               </div>
             </div>
-            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className=" pb-4 m-auto  ">
                 <FaMobile
                   style={{
@@ -334,7 +352,7 @@ function Body() {
                 </div>
               </div>
             </div>
-            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className="pb-4 m-auto  ">
                 <FaEdit
                   style={{
@@ -365,7 +383,7 @@ function Body() {
             </div>
           </div>
           <div className="flex flex-col md:flex-row mt-8 p-8 items-center   m-auto  justify-evenly">
-            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className="pb-4 m-auto  ">
                 <FaDatabase
                   style={{
@@ -393,7 +411,7 @@ function Body() {
                 </div>
               </div>
             </div>
-            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className="pb-4 m-auto ">
                 <BiLink
                   style={{
@@ -421,7 +439,7 @@ function Body() {
                 </div>
               </div>
             </div>
-            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className="pb-4 m-auto">
                 <BsFillFileEarmarkCodeFill
                   style={{

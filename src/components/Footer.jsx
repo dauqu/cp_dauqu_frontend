@@ -46,7 +46,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-[#FFFFFF] flex flex-col text-center md:flex-row  items-center   m-auto xl:p-8  my-6    justify-evenly ">
+      <div className="bg-[rgb(255,255,255)] flex flex-col text-center md:flex-row  items-center   m-auto xl:p-8  my-6    justify-evenly ">
         <div className="md:w-[20%] text-left my-5 md:my-0">
           <div className="">
             <div className="text-[45px] text-[#124957] font-semibold">
