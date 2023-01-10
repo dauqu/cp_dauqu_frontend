@@ -102,7 +102,7 @@ function Body() {
           <div
             style={{
               position: "relative",
-              top: "-190px",
+              top: "-180px",
               margin: "auto",
               borderRadius: "8px",
               width: "80%",

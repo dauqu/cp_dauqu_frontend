@@ -12,6 +12,7 @@ import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { GiCheckMark } from "react-icons/gi";
 import { API } from "./Constant";
+import SolarSystem from "./SolarSystem";
 function Header() {
   const scrollToTop = () => {
     window.scrollTo({
@@ -169,19 +170,19 @@ function Header() {
             height: "100%",
           }}
         >
-          <div className="text-center items-center mb-[40px] pt-40">
-            <div className="text-white p-2 font-bold lg:text-[40px] text-[25px] mt-10 sm:mt-0">
+          <div className="text-center items-center mb-[40px] pt-12 mt-8 relative z-10">
+            <div className="text-white p-2 font-bold lg:text-[40px] text-[25px] mt-10 sm:mt-0 relative z-10">
               Deploy your app in minutes with Dauqu
             </div>
 
-            <div className="  text-[#B1CBCF] text-[17px] md:w-1/2 m-auto text-center mt-5">
+            <div className="  text-[#B1CBCF] text-[17px] md:w-1/2 m-auto text-center mt-8  relative z-10">
               Using Dauqu you can deploy your app in minutes. Dauqu is a cloud
               based platform that allows you to deploy your app in minutes.
               Dauqu support all major languages and frameworks.
             </div>
-            <div className="flex mt-8 justify-center">
+            <div className="flex mt-12 justify-center z-10  relative">
               <div className="">
-                <button className="bg-[#FFFFFF] p-2 text-[#3E6F7A] font-semibold  ">
+                <button className="bg-[#FFFFFF] p-2 text-[#3E6F7A] font-semibold">
                   Contact Us on Whatsapp +91 7375765160
                 </button>
               </div>
@@ -192,7 +193,7 @@ function Header() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -10, opacity: 0 }}
                 transition={{ duration: 0.7, stiffness: 500 }}
-                className="mt-4 flex items-center justify-center   w-1/2 m-auto"
+                className="mt-4 flex items-center justify-center   w-1/2 m-auto relative z-10"
               >
                 <div className="elementLink text-center bg-slate-200 p-[4px] w-auto ">
                   wget https://dauqu.com/install.sh && ./install.sh
@@ -216,6 +217,9 @@ function Header() {
                 </div>
               </motion.div>
             ) : null}
+            <div className="flex justify-center items-center content-center	relative    m-12 text-center h-[250px] z-0">
+              <SolarSystem />
+            </div>
           </div>
         </motion.div>
       </div>

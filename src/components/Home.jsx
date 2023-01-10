@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 
 function Home() {
   return (
-    <div>
+    <div className="overflow-hidden">
        
       <div className="">
         <Header />
