@@ -18,6 +18,7 @@ import docker from "../assets/images/docker.svg";
 import sql from "../assets/images/sql.svg";
 import c from "../assets/images/c.svg";
 import db from "../assets/images/db.svg";
+import main from "../assets/images/main.png";
 import kotlin from "../assets/images/kotlin.svg";
 function SolarSystem() {
   return (
@@ -31,19 +32,19 @@ function SolarSystem() {
     // </div>
     <div className="w-full min-h-[60vh] flex items-center justify-center z-0">
       <div className="w-[300px] h-[300px] relative flex items-center justify-center">
-        <div className="w-[40px] h-[40px] absolute top-[130px] left-[130px]">
-          <img src={js} className="w-[40px] rounded-full" />
+        <div className="w-[60px] h-[60px] absolute top-[130px] left-[130px]">
+          <img src={main} className="w-[60px] rounded-full" />
         </div>
-        <div className="electron w-[200px] flex  ">
+        <div className="electron w-[220px] flex  ">
           <img src={react} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electronOne w-[300px] flex  ">
+        <div className="electronOne w-[350px] flex  ">
           <img src={angular} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electrontwo w-[380px] flex  ">
+        <div className="electrontwo w-[400px] flex  ">
           <img src={css} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electronthree w-[480px] flex  ">
+        <div className="electronthree w-[500px] flex  ">
           <img src={python} className="w-[40px] rounded-full" alt="" />
         </div>
         <div className="electronfour w-[580px] flex  ">
@@ -59,7 +60,7 @@ function SolarSystem() {
           <img src={c} className="w-[40px] rounded-full" alt="" />
         </div>
         <div className="electronnine w-[910px] flex  ">
-          <img src={tailwindcss} className="w-[40px] rounded-full" alt="" />
+          <img src={js} className="w-[40px] rounded-full" alt="" />
         </div>
       </div>
     </div>
