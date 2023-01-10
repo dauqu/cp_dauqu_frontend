@@ -12,6 +12,7 @@ import { API } from "./Constant";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SubscibedPlan from "./SubscibedPlan";
+import CircularProgress from "@mui/material/CircularProgress";
 // import { BsFillPatchCheckFill } from "react-icons/bs";
 function Profile() {
   const [showModal, setShowModal] = useState(false); // modal for password update
@@ -717,7 +718,10 @@ function Profile() {
             height: "100%",
           }}
         >
-          <section className="pt-16 bg-blueGray-50">
+          <div className="flex justify-center text-center p-24">
+            <CircularProgress size={50} />
+          </div>
+          {/* <section className="pt-16 bg-blueGray-50">
             <div className="w-full lg:w-4/12 px-4 mx-auto ">
               <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
                 <div className="px-6">
@@ -736,7 +740,7 @@ function Profile() {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
         </motion.div>
       )}
     </div>

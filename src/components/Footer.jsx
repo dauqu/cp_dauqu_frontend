@@ -47,21 +47,21 @@ function Footer() {
         </div>
       </div>
       <div className="bg-[#FFFFFF] flex flex-col text-center md:flex-row  items-center   m-auto xl:p-8  my-6    justify-evenly ">
-        {/* <div className="md:w-[20%]  my-5 md:my-0">
+        <div className="md:w-[20%] text-left my-5 md:my-0">
           <div className="">
             <div className="text-[45px] text-[#124957] font-semibold">
               Dauqu
             </div>
-            <div className="text-[#3A3A3A]">
+            <div className="text-[#3A3A3A] ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
               rerum
             </div>
           </div>
           <div className="mt-10 text-[#3A3A3A]">Copyright 2022 by Dauqu</div>
         </div>
-        <div className="md:w-[20%]  md:my-0 ">
+        <div className="md:w-[20%] text-left  md:my-0 ">
           <div className="text-[25px] items-center mt-2 text-[#3A3A3A] font-semibold">
-            Solutions
+            About
           </div>
           <div className="">
             <div className="text-[#3A3A3A]  cursor-pointer  mt-2">
@@ -76,45 +76,43 @@ function Footer() {
             <div className="text-[#3A3A3A]  cursor-pointer mt-2">
               Business analycis
             </div>
-            <div className="text-[#3A3A3A] cursor-pointer  mt-2">
-              Plans & Signup
-            </div>
           </div>
         </div>
-        <div className="md:w-[20%]  md:my-0">
+
+        <div className="md:w-[20%] text-left  md:my-0 ">
           <div className="text-[25px] items-center mt-2 text-[#3A3A3A] font-semibold">
-            Company
+            Pages
           </div>
           <div className="">
             <div className="text-[#3A3A3A]  cursor-pointer  mt-2">
-              About Us{" "}
+              Software Programme
             </div>
-            <div className="text-[#3A3A3A]  cursor-pointer mt-2">Services</div>
-            <div className="text-[#3A3A3A]  cursor-pointer mt-2">Price</div>
             <div className="text-[#3A3A3A]  cursor-pointer mt-2">
-              Testimonials
+              App Solutions
             </div>
-            <div className="text-[#3A3A3A] cursor-pointer  mt-2">
-              Our Clients
+            <div className="text-[#3A3A3A]  cursor-pointer mt-2">
+              Social Media Management
+            </div>
+            <div className="text-[#3A3A3A]  cursor-pointer mt-2">
+              Business analycis
             </div>
           </div>
-        </div> */}
-        <div className="md:w-auto text-center md:my-0">
-          <div className="text-[25px] items-center mt-2  text-[#3A3A3A] font-semibold">
+        </div>
+        <div className="md:w-[20%] text-left  md:my-0 ">
+          <div className="text-[25px] items-center mt-2 text-[#3A3A3A] font-semibold">
             Contact
           </div>
           <div className="">
-            <div className="text-[#3A3A3A]  cursor-pointer mt-2 text-left">
+            <div className="text-[#3A3A3A]  cursor-pointer  mt-2">
               <b>Address: &nbsp;</b> Netaji Subhash Place (New Delhi)
             </div>
-            <div className="text-[#3A3A3A]  cursor-pointer mt-2 text-left">
+            <div className="text-[#3A3A3A]  cursor-pointer mt-2">
               <b>Email: &nbsp;</b>info@dauqu.com
             </div>
-            <div className="text-[#3A3A3A]  cursor-pointer mt-2 text-left">
-              {" "}
+            <div className="text-[#3A3A3A]  cursor-pointer mt-2">
               <b>Phone: &nbsp;</b>+91 9369390970
             </div>
-            {/* <div className="text-[#3A3A3A] md:w-1/2   m-auto cursor-pointer justify-evenly  mt-2 flex  ">
+            <div className="text-[#3A3A3A]  cursor-pointer mt-2 flex items-center">
               <div className="md:w-[15%] hover:text-[#1773EB]">
                 <FaFacebookF style={{ fontSize: "20px" }} />
               </div>
@@ -127,7 +125,7 @@ function Footer() {
               <div className="md:w-[15%] hover:text-[#33A9EC]">
                 <AiOutlineTwitter style={{ fontSize: "20px" }} />
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
