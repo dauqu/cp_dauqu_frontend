@@ -122,7 +122,7 @@ function Body() {
             Testimonials
           </div>
           <div className="flex p-4 flex-col md:flex-row justify-evenly items-center   m-auto pt-8 w-full">
-            <div className="card md:m-2  md:mt:0 mt-4 md:w-96  w-78  m-auto bg-base-100 ">
+            <div className="card  rounded-none  md:m-2  md:mt:0 mt-4 md:w-96  w-78  m-auto bg-base-100 ">
               <figure className="px-10 pt-10">
                 <BsCloudDownloadFill size={50} />
               </figure>
@@ -134,7 +134,7 @@ function Body() {
                 </div> */}
               </div>
             </div>
-            <div className="card md:m-2 md:mt:0 mt-4  md:w-96  w-78 bg-base-100 ">
+            <div className="card  rounded-none  md:m-2 md:mt:0 mt-4  md:w-96  w-78 bg-base-100 ">
               <figure className="px-10 pt-10">
                 <FaUsers size={50} />
               </figure>
@@ -146,7 +146,7 @@ function Body() {
                 </div> */}
               </div>
             </div>
-            <div className="card md:m-2 md:mt:0 mt-4 md:w-96  w-78 bg-base-100 ">
+            <div className="card  rounded-none  md:m-2 md:mt:0 mt-4 md:w-96  w-78 bg-base-100 ">
               <figure className="px-10 pt-10">
                 <GiElectric size={50} />
               </figure>
@@ -278,7 +278,7 @@ function Body() {
             Easily Integrate with your favorite Services
           </div>
           <div className="flex flex-col md:flex-row mt-8 p-8 items-center   m-auto  justify-evenly">
-            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]   my-5 md:my-0">
+            <div className="card  rounded-none  first-letter:flex bg-[#FFFFFF] p-6 w-[350px]   my-5 md:my-0">
               <div className="pb-4  m-auto  ">
                 <AiFillBulb
                   style={{
@@ -306,7 +306,7 @@ function Body() {
                 </div>
               </div>
             </div>
-            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className=" pb-4 m-auto  ">
                 <FaMobile
                   style={{
@@ -334,7 +334,7 @@ function Body() {
                 </div>
               </div>
             </div>
-            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className="pb-4 m-auto  ">
                 <FaEdit
                   style={{
@@ -365,7 +365,7 @@ function Body() {
             </div>
           </div>
           <div className="flex flex-col md:flex-row mt-8 p-8 items-center   m-auto  justify-evenly">
-            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className="pb-4 m-auto  ">
                 <FaDatabase
                   style={{
@@ -393,7 +393,7 @@ function Body() {
                 </div>
               </div>
             </div>
-            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className="pb-4 m-auto ">
                 <BiLink
                   style={{
@@ -421,7 +421,7 @@ function Body() {
                 </div>
               </div>
             </div>
-            <div className="card flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
+            <div className="card  rounded-none  flex bg-[#FFFFFF] p-6 w-[350px]  my-5 md:my-0">
               <div className="pb-4 m-auto">
                 <BsFillFileEarmarkCodeFill
                   style={{
