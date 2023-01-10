@@ -46,7 +46,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-[rgb(255,255,255)] flex flex-col text-center md:flex-row  items-center   m-auto xl:p-8  my-6    justify-evenly ">
+      <div className="bg-[rgb(255,255,255)] flex flex-col text-center md:flex-row  md:items-center   m-auto xl:p-8  my-6    justify-evenly ">
         <div className="md:w-[20%] text-left my-5 md:my-0">
           <div className="">
             <div className="text-[45px] text-[#124957] font-semibold">
@@ -104,7 +104,7 @@ function Footer() {
           </div>
           <div className="">
             <div className="text-[#3A3A3A]  cursor-pointer  mt-2">
-              <b>Address: &nbsp;</b> Netaji Subhash Place (New Delhi)
+              <b>Address: &nbsp;</b> N.S.P (New Delhi)
             </div>
             <div className="text-[#3A3A3A]  cursor-pointer mt-2">
               <b>Email: &nbsp;</b>info@dauqu.com
@@ -112,7 +112,7 @@ function Footer() {
             <div className="text-[#3A3A3A]  cursor-pointer mt-2">
               <b>Phone: &nbsp;</b>+91 9369390970
             </div>
-            <div className="text-[#3A3A3A]  cursor-pointer mt-2 flex items-center">
+            <div className="text-[#3A3A3A]  cursor-pointer md:mt-2 mt-8 flex items-center md:justify-self-start justify-evenly">
               <div className="md:w-[15%] hover:text-[#1773EB]">
                 <FaFacebookF style={{ fontSize: "20px" }} />
               </div>

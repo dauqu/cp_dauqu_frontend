@@ -179,8 +179,8 @@ function Body() {
           <div className="text-[#333333] md:text-[40px] flex justify-center font-bold mb-6">
             Lets See How it Works
           </div>
-          <div className="flex flex-col md:flex-row justify-evenly items-stretch m-auto pt-8 w-full">
-            <div className="bg-[#FFFFFF] p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0 flex flex-col ">
+          <div className="flex flex-col md:flex-row justify-evenly     items-stretch m-auto pt-8 w-full">
+            <div className="bg-[#FFFFFF] p-3 xl:p-6 text-center items-center w-[300px] md:m-0 m-auto   my-5 md:my-0 flex flex-col ">
               <div className="bg-[#FEF4F1] p-6 m-4">
                 <BiCodeAlt size={30} />
               </div>
@@ -199,7 +199,7 @@ function Body() {
                 </button>
               </div>
             </div>
-            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0 flex flex-col">
+            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] md:m-0 m-auto my-5 md:my-0 flex flex-col">
               <div className="bg-[#E6FAF4] p-6 m-4">
                 <IoImagesSharp size={30} />
               </div>
@@ -219,7 +219,7 @@ function Body() {
                 </button>
               </div>
             </div>
-            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0 flex flex-col">
+            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] md:m-0 m-auto my-5 md:my-0 flex flex-col">
               <div className="bg-[#FEF7E7] p-6 m-4">
                 <FaDocker size={30} />
               </div>
@@ -238,7 +238,7 @@ function Body() {
                 </button>
               </div>
             </div>
-            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] my-5 md:my-0 flex flex-col">
+            <div className="bg-[#FFFFFF]  p-3 xl:p-6 text-center items-center w-[300px] md:m-0 m-auto my-5 md:my-0 flex flex-col">
               <div className="bg-[#F5E8FE] p-6 m-4">
                 <RiSecurePaymentFill size={30} />
               </div>
