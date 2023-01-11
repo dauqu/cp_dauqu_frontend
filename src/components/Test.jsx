@@ -1,68 +1,73 @@
+import React from "react";
+import logo from "../logo.svg";
+import "../App.css";
 import axios from "axios";
-import React, { useState } from "react";
-import "../assets/css/Test.css";
 import { API } from "./Constant";
 
-function Test() {
-  const [book, setBook] = useState({
-    name: "The Fault In Our Stars",
-    author: "John Green",
-    img: "https://images-na.ssl-images-amazon.com/images/I/817tHNcyAgL.jpg",
-    price: 150,
-  });
+function App() {
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
 
-  const initPayment = (data) => {
-    const options = {
-      key: "5Ot7vrf8y5PeOcxxMc50HQku",
-      amount: data.amount,
-      currency: data.currency,
-      name: book.name,
-      description: "Test Transaction",
-      image: book.img,
-      order_id: data.id,
-      handler: async (response) => {
-        try {
-          const verifyUrl = `${API}/payement/verify`;
-          const { data } = await axios.post(verifyUrl, response);
-          console.log(data);
-        } catch (error) {
-          console.log(error);
-        }
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+ 
+
+    var options = {
+      key: "rzp_test_fYtFrx227DT8xU", // Enter the Key ID generated from the Dashboard
+      amount: "50000",
+      currency: "INR",
+      description: "Acme Corp",
+      image: "https://avatars.githubusercontent.com/u/95732637?v=4",
+      prefill: {
+        email: "gaurav.kumar@example.com",
+        contact: +919900000000,
       },
-      theme: {
-        color: "#3399cc",
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+      },
+      modal: {
+        ondismiss: function () {
+          if (alert("Are you sure, you want to close the form?")) {
+            var txt = "You pressed OK!";
+            console.log("Checkout form closed by the user");
+          } else {
+            txt = "You pressed Cancel!";
+            console.log("Complete the Payment");
+          }
+        },
       },
     };
-    const rzp1 = new window.Razorpay(options);
-    rzp1.open();
-  };
-
-  const handlePayment = async () => {
-    try {
-      const orderUrl = `${API}/payement/orders`;
-      const { data } = await axios.post(orderUrl, { amount: book.price });
-      console.log(data);
-      initPayment(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
   return (
     <div className="App">
-      <div className="book_container">
-        <img src={book.img} alt="book_img" className="book_img" />
-        <p className="book_name">{book.name}</p>
-        <p className="book_author">By {book.author}</p>
-        <p className="book_price">
-          Price : <span>&#x20B9; {book.price}</span>
-        </p>
-        <button onClick={handlePayment} className="buy_btn">
-          buy now
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>Buy React now!</p>
+        <button className="App-link" onClick={displayRazorpay}>
+          Pay ₹500
         </button>
-      </div>
+      </header>
     </div>
   );
 }
 
-export default Test;
+export default App;

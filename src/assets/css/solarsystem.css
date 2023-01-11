@@ -21,7 +21,6 @@
   border-radius: 50%;
   left: 50%;
   top: 50%;
-  
 
   transform: translate(-50%, -50%);
 }
@@ -34,15 +33,14 @@
   left: -20px;
   top: -20px;
   border-radius: 50%;
+
   margin: 51px;
 }
 .electronOne {
   position: absolute;
-  animation: rotation 4s infinite linear;
+  animation: rotation 3s infinite linear;
   border-radius: 50%;
   left: 50%;
-  
-
   top: 50%;
   transform: translate(-50%, -50%);
 }
@@ -59,10 +57,9 @@
 }
 .electrontwo {
   position: absolute;
-  animation: rotation 6s infinite linear;
+  animation: rotation 4s infinite linear;
   border-radius: 50%;
   left: 50%;
-  
 
   top: 50%;
   transform: translate(-50%, -50%);
@@ -78,32 +75,29 @@
   border-radius: 50%;
   margin: 51px;
 }
-
+.electronthree {
+  position: absolute;
+  animation: rotation 4s infinite linear;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .electronthree::before {
   content: "";
   width: 20px;
   height: 20px;
-  
-
   position: absolute;
   left: -20px;
   top: -20px;
   border-radius: 50%;
   margin: 51px;
 }
-.electronthree {
-  position: absolute;
-  animation: rotation 8s infinite linear;
-  border-radius: 50%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+
 .electronfour {
   position: absolute;
-  animation: rotation 6s infinite linear;
+  animation: rotation 5s infinite linear;
   border-radius: 50%;
-  
 
   left: 50%;
   top: 50%;
@@ -122,9 +116,8 @@
 }
 .electronfive {
   position: absolute;
-  animation: rotation 10s infinite linear;
+  animation: rotation 5s infinite linear;
   border-radius: 50%;
-  
 
   left: 50%;
   top: 50%;
@@ -141,32 +134,30 @@
   border-radius: 50%;
   margin: 51px;
 }
-
+.electronsix {
+  position: absolute;
+  animation: rotation 6s infinite linear;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .electronsix::before {
   content: "";
   width: 20px;
   height: 20px;
   position: absolute;
   left: -20px;
-  
 
   top: -20px;
   border-radius: 50%;
   margin: 51px;
 }
-.electronsix {
-  position: absolute;
-  animation: rotation 11s infinite linear;
-  border-radius: 50%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+
 .electronseven {
   position: absolute;
-  animation: rotation 12s infinite linear;
+  animation: rotation 6s infinite linear;
   border-radius: 50%;
-  
 
   left: 50%;
   top: 50%;
@@ -185,10 +176,9 @@
 }
 .electronnine {
   position: absolute;
-  animation: rotation 15s infinite linear;
+  animation: rotation 8s infinite linear;
   border-radius: 50%;
   left: 50%;
-  
 
   top: 50%;
   transform: translate(-50%, -50%);

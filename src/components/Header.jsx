@@ -217,7 +217,7 @@ function Header() {
                 </div>
               </motion.div>
             ) : null}
-            <div className="flex justify-center items-center content-center	relative    m-12 text-center h-[250px] z-0">
+            <div className="flex justify-center items-center content-center	relative    m-12 text-center h-[150px] z-0">
               <SolarSystem />
             </div>
           </div>

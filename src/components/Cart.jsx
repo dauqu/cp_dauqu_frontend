@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsHandbag } from "react-icons/bs";
 import { BiCreditCard } from "react-icons/bi";
+import { SiRazorpay } from "react-icons/si";
 import SecondHeader from "./SecondHeader";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaStripeS } from "react-icons/fa";
 import { BsPaypal } from "react-icons/bs";
-import { SiRazorpay } from "react-icons/si";
 import axios from "axios";
 import { API } from "./Constant";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import ck from "../assets/images/ck.svg";
 import loginplease from "../assets/images/loginPlease.jpg";
-
+import rpay from "../assets/images/razorpay.svg";
 function Cart() {
   const [hiddendiv, setHiddendiv] = useState(false);
   // scroll to top function
@@ -86,7 +86,7 @@ function Cart() {
         country: details.payer.address.country_code,
         order_status: details.status,
         userUniqueKey: user_uniqueKey,
-        months: cart.plan_duration
+        months: cart.plan_duration,
       })
       .then((res) => {
         console.log(res);
@@ -95,6 +95,59 @@ function Cart() {
         console.log(err);
       });
   };
+
+  // razor pay----------------------------------------------------------------
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+  //  var amount = paypal_payment;
+    var options = {
+      key: "rzp_test_fYtFrx227DT8xU", // Enter the Key ID generated from the Dashboard
+      amount:"50000",
+      currency: "INR",
+      description: "Acme Corp",
+      image: "https://avatars.githubusercontent.com/u/95732637?v=4",
+      prefill: {
+        email: "gaurav.kumar@example.com",
+        contact: +919900000000,
+      },
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+      },
+      modal: {
+        ondismiss: function () {
+          if (alert("Are you sure, you want to close the form?")) {
+            var txt = "You pressed OK!";
+            console.log("Checkout form closed by the user");
+          } else {
+            txt = "You pressed Cancel!";
+            console.log("Complete the Payment");
+          }
+        },
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
 
   return (
     <div className="">
@@ -218,6 +271,25 @@ function Cart() {
                             }}
                           />
                         </PayPalScriptProvider>
+                        <div className="w-full mt-4">
+                          <button
+                            className="btn  w-full rounded-[3px] flex justify-center text-[15px] "
+                            onClick={displayRazorpay}
+                          >
+                            <div className="w-auto">
+                              {/* <SiRazorpay /> */}
+                              <img
+                                src={rpay}
+                                className="w-[48px] h-[48px]"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div>
+                              <p className="italic ">RazorPay</p>
+                            </div>
+                          </button>
+                        </div>
                       </motion.div>
                     </>
                   ) : (

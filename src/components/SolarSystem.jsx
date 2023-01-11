@@ -35,31 +35,31 @@ function SolarSystem() {
         <div className="w-[60px] h-[60px] absolute top-[130px] left-[130px]">
           <img src={main} className="w-[60px] rounded-full" />
         </div>
-        <div className="electron w-[220px] flex  ">
-          <img src={react} className="w-[40px] rounded-full" alt="" />
+        <div className="electron w-[220px] flex  justify-start ">
+          <img src={react} className="w-[40px]  rounded-full" alt="" />
         </div>
-        <div className="electronOne w-[350px] flex  ">
+        <div className="electronOne w-[350px] flex justify-end  ">
           <img src={angular} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electrontwo w-[400px] flex  ">
+        <div className="electrontwo w-[400px] flex  justify-start ">
           <img src={css} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electronthree w-[500px] flex  ">
+        <div className="electronthree w-[500px] flex justify-end  ">
           <img src={python} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electronfour w-[580px] flex  ">
+        <div className="electronfour w-[580px] flex justify-start  ">
           <img src={dart} className="w-[40px]  " alt="" />
         </div>
-        <div className="electronfive w-[680px] flex  ">
+        <div className="electronfive w-[680px] flex  justify-end ">
           <img src={flutter} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electronsix w-[750px] flex  ">
+        <div className="electronsix w-[750px] flex justify-start ">
           <img src={spring} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electronseven w-[830px] flex  ">
+        <div className="electronseven w-[830px] flex justify-end ">
           <img src={c} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electronnine w-[910px] flex  ">
+        <div className="electronnine w-[910px] flex justify-start  ">
           <img src={js} className="w-[40px] rounded-full" alt="" />
         </div>
       </div>
