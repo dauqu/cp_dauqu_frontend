@@ -122,7 +122,7 @@ function Cart() {
   //  var amount = paypal_payment;
     var options = {
       key: "rzp_test_fYtFrx227DT8xU", // Enter the Key ID generated from the Dashboard
-      amount: "200",
+      amount: Number(cart.plan_price)*100,
       currency: "INR",
       description: "Acme Corp",
       image: "https://avatars.githubusercontent.com/u/95732637?v=4",
