@@ -20,16 +20,11 @@ import c from "../assets/images/c.svg";
 import db from "../assets/images/db.svg";
 import main from "../assets/images/main.png";
 import kotlin from "../assets/images/kotlin.svg";
+import c2 from "../assets/images/c2.svg";
+import ts from "../assets/images/ts.svg";
+import swift from "../assets/images/swift.svg";
 function SolarSystem() {
   return (
-    // <div className="maindiv">
-    //   <div className="proton">
-    //     <img src={js} className="w-[40px] rounded-full" />
-    //   </div>
-    //   <div className="electron">
-    //     <img src={react} className="w-[40px] rounded-full" alt="" />
-    //   </div>
-    // </div>
     <div className="w-full min-h-[60vh] flex items-center justify-center z-0">
       <div className="w-[300px] h-[300px] relative flex items-center justify-center">
         <div className="w-[60px] h-[60px] absolute top-[130px] left-[130px]">
@@ -59,8 +54,17 @@ function SolarSystem() {
         <div className="electronseven w-[830px] flex justify-end ">
           <img src={c} className="w-[40px] rounded-full" alt="" />
         </div>
-        <div className="electronnine w-[910px] flex justify-start  ">
+        <div className="electroneight w-[910px] flex justify-start  ">
+          <img src={c2} className="w-[40px] rounded-full" alt="" />
+        </div>
+        <div className="electronnine w-[910px] flex justify-end  ">
           <img src={js} className="w-[40px] rounded-full" alt="" />
+        </div>
+        <div className="electronten w-[1000px] flex justify-start  ">
+          <img src={swift} className="w-[40px] rounded-full" alt="" />
+        </div>
+        <div className="electroneleven w-[1000px] flex justify-end  ">
+          <img src={ts} className="w-[40px] rounded-full" alt="" />
         </div>
       </div>
     </div>

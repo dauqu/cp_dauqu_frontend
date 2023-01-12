@@ -54,7 +54,7 @@ function Header() {
   return (
     <>
       <div className="mainheader bg-[#165461]    ">
-        <nav className="w-full bg-[#01232a]    ">
+        <nav className="w-full bg-[#01232a]  relative z  ">
           <div className="justify-between px-4 mx-auto lg:max-w-8xl md:items-center md:flex md:px-8">
             <div>
               <div className="flex items-center justify-between py-3 md:py-4 md:block">
