@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { BiRupee } from "react-icons/bi";
 import { GiCheckMark } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { API } from "./Constant";
@@ -73,7 +74,18 @@ function SubscibedPlan() {
                 <div>
                   <div className="md:flex items-center">
                     <div className="p-2 font-semibold"> Amount:</div>
-                    <div className="p-2">${fulldetails.product_price}</div>
+                    {fulldetails.product_price.length <= 2 ? (
+                      <>
+                        <div className="p-2">${fulldetails.product_price}</div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-2 flex items-center">
+                          <BiRupee />
+                          {fulldetails.product_price}
+                        </div>
+                      </>
+                    )}
                   </div>
                   <div className="md:flex items-center">
                     <div className="p-2 font-semibold"> Start Date:</div>

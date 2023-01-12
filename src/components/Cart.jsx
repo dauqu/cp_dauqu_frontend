@@ -119,7 +119,6 @@ function Cart() {
         console.log(err);
       });
   };
-
   // razor pay----------------------------------------------------------------
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -160,7 +159,8 @@ function Cart() {
         // console.log(response);
         axios
           .post(`${API}/orders`, {
-            order_id: cart._id,
+            // generate order id randomly
+            order_id: Math.floor(Math.random() * 100000000000000),
             order_by: user.name,
             date: new Date().toLocaleString(),
             status: "success",
@@ -168,7 +168,7 @@ function Cart() {
             email: user.email,
             payment_Status: "success",
             product_slug: cart.plan_slug,
-            product_price: cart.plan_price,
+            product_price: Number(cart.plan_price * 80),
             city: user.address,
             country: user.country,
             order_status: "success",
