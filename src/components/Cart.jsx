@@ -15,8 +15,25 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import ck from "../assets/images/ck.svg";
 import loginplease from "../assets/images/loginPlease.jpg";
 import rpay from "../assets/images/razorpay.svg";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 function Cart() {
   const [hiddendiv, setHiddendiv] = useState(false);
+  const [paypalPaymentSuccess, setPaypalPaymentSuccess] = useState(false); // for paypal payment success message
+  const notif = () => {
+    toast.success("Thankyou 👍 for choosing our plan.", {
+      position: "top-right",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
   // scroll to top function
   const scrollToTop = () => {
     window.scrollTo({
@@ -67,6 +84,7 @@ function Cart() {
   }, [slug]);
 
   const paypal_payment = cart.plan_price;
+
   // console.log(paypal_payment);
   const [successPayment, setSuccessPayment] = useState([]);
   // code to post success payment response to backend
@@ -87,9 +105,15 @@ function Cart() {
         order_status: details.status,
         userUniqueKey: user_uniqueKey,
         months: cart.plan_duration,
+        payment_method: "paypal",
       })
       .then((res) => {
         console.log(res);
+        notif();
+        setPaypalPaymentSuccess(true);
+        setTimeout(() => {
+          window.location.href = "/profile";
+        }, [3000]);
       })
       .catch((err) => {
         console.log(err);
@@ -119,10 +143,10 @@ function Cart() {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-  //  var amount = paypal_payment;
+    //  var amount = paypal_payment;
     var options = {
       key: "rzp_test_fYtFrx227DT8xU", // Enter the Key ID generated from the Dashboard
-      amount: Number(cart.plan_price)*100,
+      amount: Number(cart.plan_price * 100 * 80),
       currency: "INR",
       description: "Acme Corp",
       image: "https://avatars.githubusercontent.com/u/95732637?v=4",
@@ -130,8 +154,39 @@ function Cart() {
         email: "gaurav.kumar@example.com",
         contact: +919900000000,
       },
+
       handler: function (response) {
         alert(response.razorpay_payment_id);
+        // console.log(response);
+        axios
+          .post(`${API}/orders`, {
+            order_id: cart._id,
+            order_by: user.name,
+            date: new Date().toLocaleString(),
+            status: "success",
+            phone_number: user.phone,
+            email: user.email,
+            payment_Status: "success",
+            product_slug: cart.plan_slug,
+            product_price: cart.plan_price,
+            city: user.address,
+            country: user.country,
+            order_status: "success",
+            userUniqueKey: user_uniqueKey,
+            months: cart.plan_duration,
+            payment_method: "razorpay",
+          })
+          .then((res) => {
+            console.log(res);
+            notif();
+            setPaypalPaymentSuccess(true);
+            setTimeout(() => {
+              window.location.href = "/profile";
+            }, [3000]);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       },
       modal: {
         ondismiss: function () {
@@ -145,6 +200,7 @@ function Cart() {
         },
       },
     };
+
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   }
@@ -306,6 +362,22 @@ function Cart() {
                   )}
                 </div>
               </div>
+              {paypalPaymentSuccess ? (
+                <>
+                  <ToastContainer
+                    position="top-right"
+                    autoClose={2500}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                  />
+                </>
+              ) : null}
             </div>
           </motion.div>
         </div>
