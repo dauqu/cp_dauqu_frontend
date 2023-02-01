@@ -183,7 +183,7 @@ function Header() {
             {/* <div className="flex mt-12 justify-center z-10  relative">
               <div className="">
                 <button className="bg-[#FFFFFF] p-2 text-[#3E6F7A] font-semibold">
-                  Contact Us on Whatsapp +91 7375765160
+                  Contact Us on Whatsapp +91 7275765160
                 </button>
               </div>
             </div> */}
